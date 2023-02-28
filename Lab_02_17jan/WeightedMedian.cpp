@@ -142,7 +142,7 @@ public:
 int main() {
     MedianFinder mf;
 
-    // Insert elements with weights
+    // Insert elements with weights - test 1
     mf.insert(1, 5);
     mf.insert(2, 4);
     mf.insert(3, 3);
@@ -150,7 +150,7 @@ int main() {
     mf.insert(5, 1);
     mf.insert(6, 6);
 
-    // Remove an element
+    // test 2
     // mf.insert(1,1);
     // mf.insert(2,2);
 
@@ -158,11 +158,12 @@ int main() {
     pair<int, int> firstMedian = mf.getMedian();
     cout << "Median: " << firstMedian.first << ", weight: " << firstMedian.second << endl;
     mf.print();
+    //remove for test 1
+    mf.remove(6);
+    pair<int, int> SecondMedian = mf.getMedian();
+    cout << "Median: " << SecondMedian.first << ", weight: " << SecondMedian.second << endl;
+    mf.print();
     
-    // mf.remove(6);
-    // pair<int, int> SecondMedian = mf.getMedian();
-    // cout << "Median: " << SecondMedian.first << ", weight: " << SecondMedian.second << endl;
-    // mf.print();
     // int choice;
     // while(true) {
     //     cout<<"1. Insert\n2. Remove\n3. Exit\n";
