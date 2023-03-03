@@ -128,6 +128,7 @@ int main() {
     vector<VerticalLine> verticalLines = {{1, 1, 5}, {3, 2, 6}, {5, 4, 8}};
     vector<HorizontalLine> horizontalLines = {{2, 0, 4}, {4, 1, 5}, {7, 3, 6}};
     set<pair<int, int>> intersections = findIntersections(verticalLines, horizontalLines);
+    cout << "Intersections:" << endl;
     for (const auto& p : intersections) {
         cout << "(" << p.first << ", " << p.second << ")" << endl;
     }
