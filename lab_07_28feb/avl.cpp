@@ -1,4 +1,3 @@
-
 #include <algorithm>  /// for std::max
 #include <iostream>   /// for std::cout
 #include <queue>      /// for std::queue
