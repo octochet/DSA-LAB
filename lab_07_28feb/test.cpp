@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Define a struct to represent vertical and horizontal lines
+// struct to represent vertical and horizontal lines
 struct VerticalLine {
     int x, y1, y2;
 };
@@ -13,7 +13,7 @@ struct HorizontalLine {
     int y, x1, x2;
 };
 
-// Define a struct to represent a node in the AVL tree
+// struct to represent a node in the AVL tree
 struct Node {
     HorizontalLine line;
     int height;
@@ -21,17 +21,17 @@ struct Node {
     Node* right;
 };
 
-// Define a function to calculate the height of a node
+// function to calculate the height of a node
 int height(Node* node) {
     return node == nullptr ? -1 : node->height;
 }
 
-// Define a function to calculate the balance factor of a node
+// function to calculate the balance factor of a node
 int balanceFactor(Node* node) {
     return node == nullptr ? 0 : height(node->left) - height(node->right);
 }
 
-// Define a function to rotate a subtree to the left
+// function to rotate a subtree to the left
 Node* rotateLeft(Node* node) {
     Node* newRoot = node->right;
     node->right = newRoot->left;
@@ -41,7 +41,7 @@ Node* rotateLeft(Node* node) {
     return newRoot;
 }
 
-// Define a function to rotate a subtree to the right
+// function to rotate a subtree to the right
 Node* rotateRight(Node* node) {
     Node* newRoot = node->left;
     node->left = newRoot->right;
@@ -51,7 +51,7 @@ Node* rotateRight(Node* node) {
     return newRoot;
 }
 
-// Define a function to balance a node
+// function to balance a node
 Node* balance(Node* node) {
     int bf = balanceFactor(node);
     if (bf > 1) {
@@ -68,7 +68,7 @@ Node* balance(Node* node) {
     return node;
 }
 
-// Define a function to insert a horizontal line into the AVL tree
+// function to insert a horizontal line into the AVL tree
 Node* insert(Node* root, const HorizontalLine& line) {
     if (root == nullptr) {
         root = new Node{line, 0, nullptr, nullptr};
@@ -85,8 +85,7 @@ Node* insert(Node* root, const HorizontalLine& line) {
 Node* activeLines = nullptr;
 
 // Define the line sweep algorithm
-set<pair<int, int>> findIntersections(const vector<VerticalLine>& verticalLines,
-                                       const vector<HorizontalLine>& horizontalLines) {
+set<pair<int, int>> findIntersections(const vector<VerticalLine>& verticalLines, const vector<HorizontalLine>& horizontalLines) {
     // Process each vertical line in order
     set<pair<int, int>> intersections;
     for (const auto& vl : verticalLines) {
