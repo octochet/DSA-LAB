@@ -149,9 +149,17 @@ int main() {
     mf.insert(4, 2);
     mf.insert(5, 1);
     mf.insert(6, 6);
-
+/*  
+sorted test 1 with cf:
+    1 0.238095
+    2 0.428571     --median = 2
+    3 0.571429
+    4 0.666667
+    5 0.714286
+    6 1
+*/
     // test 2
-    // mf.insert(1,1);
+    // mf.insert(1,1);   --median = 1
     // mf.insert(2,2);
 
     // Get the median
@@ -160,6 +168,14 @@ int main() {
     mf.print();
     //remove for test 1
     mf.remove(6);
+/*
+after removing 6:
+    1 0.333333      --median = 1
+    2 0.6
+    3 0.8
+    4 0.933333
+    5 1
+*/
     pair<int, int> SecondMedian = mf.getMedian();
     cout << "Median: " << SecondMedian.first << ", weight: " << SecondMedian.second << endl;
     mf.print();
