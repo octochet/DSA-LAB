@@ -7,3 +7,4 @@ LAB 4: α-quantile (using select and quickselect)❌; stable 3 way quicksort✅;
 LAB 5: Huffman encoding❌; expression trees❌;
 LAB 6: BST Implementation❌;
 LAB 7: Intersection points✅;
+LAB 8: K-means Clustering✅;
