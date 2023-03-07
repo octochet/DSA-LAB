@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 using namespace std;
 
@@ -124,8 +125,9 @@ set<pair<int, int>> findIntersections(const vector<VerticalLine>& verticalLines,
 
 // Example usage:
 int main() {
-    vector<VerticalLine> verticalLines = {{1, 1, 5}, {3, 2, 6}, {5, 4, 8}};
-    vector<HorizontalLine> horizontalLines = {{2, 0, 4}, {4, 1, 5}, {7, 3, 6}};
+    vector<VerticalLine> verticalLines = {{1, 1, 5}, {3, 2, 6}, {5, 4, 8}, {-2, 1, 5}};  // x, y1, y2  
+    vector<HorizontalLine> horizontalLines = {{2, -3, 4}, {4, 1, 5}, {7, 3, 6}};  // y, x1, x2
+    sort(verticalLines.begin(), verticalLines.end(), [](const VerticalLine& a, const VerticalLine& b) { return a.x < b.x; } );
     set<pair<int, int>> intersections = findIntersections(verticalLines, horizontalLines);
     cout << "Intersections:" << endl;
     for (const auto& p : intersections) {

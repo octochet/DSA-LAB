@@ -113,7 +113,7 @@ int main()
         cout << arr[i] << " ";
     }
     cout<<endl;
-    vector<pair<int, int>> v = { {1, 1}, {5, 5}, {3, 1}, {5, 3}, {7, 1}, {5, 2}, {10, 1} };
+    vector<pair<int, int>> v = { {6, 1}, {5, 5}, {3, 1}, {5, 2}, {7, 1}, {10, 9}, {5, 7} };
     vector_sort(v, 0, v.size() - 1);
     for (int i = 0; i < v.size(); i++)
     {
