@@ -13,6 +13,22 @@ alpha is the quantile to be found
 solve the problem by modifying SELECT algorithm
 */
 
+//partition function
+int partition(int A[], int W[], int p, int r) {
+    int x = A[r];   //assign A[r] to x
+    int i = p - 1;  //assign p - 1 to i
+    for (int j = p; j <= r - 1; j++) {  //traverse the array
+        if (A[j] <= x) {    //if A[j] is less than or equal to x
+            i++;    //increment i
+            swap(A[i], A[j]);   //swap A[i] and A[j]
+            swap(W[i], W[j]);   //swap W[i] and W[j]
+        }
+    }
+    swap(A[i + 1], A[r]);   //swap A[i + 1] and A[r]
+    swap(W[i + 1], W[r]);   //swap W[i + 1] and W[r]
+    return i + 1;   //return i + 1
+}
+
 //select function
 int select(int A[], int W[], int p, int r, int alpha) {
     if (p == r) {   //if p is equal to r
@@ -29,22 +45,6 @@ int select(int A[], int W[], int p, int r, int alpha) {
     else {  //if alpha is greater than k
         return select(A, W, q + 1, r, alpha - k);   //return select function
     }
-}
-
-//partition function
-int partition(int A[], int W[], int p, int r) {
-    int x = A[r];   //assign A[r] to x
-    int i = p - 1;  //assign p - 1 to i
-    for (int j = p; j <= r - 1; j++) {  //traverse the array
-        if (A[j] <= x) {    //if A[j] is less than or equal to x
-            i++;    //increment i
-            swap(A[i], A[j]);   //swap A[i] and A[j]
-            swap(W[i], W[j]);   //swap W[i] and W[j]
-        }
-    }
-    swap(A[i + 1], A[r]);   //swap A[i + 1] and A[r]
-    swap(W[i + 1], W[r]);   //swap W[i + 1] and W[r]
-    return i + 1;   //return i + 1
 }
 
 //main function
