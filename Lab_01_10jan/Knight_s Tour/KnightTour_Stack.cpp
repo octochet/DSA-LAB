@@ -1,3 +1,7 @@
+/*
+KNIGHT'S TOUR USING STACK
+chetan moturi CS21B017
+*/
 #include <iostream>
 #include <string.h>
 #include <stack>
