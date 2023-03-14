@@ -1,73 +1,57 @@
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
-void merge(int *arr, int left, int mid, int right)
+void merge(int *arr, int *temp, int left, int mid, int right)
 {
-    int n1 = mid - left + 1;           //size of left subarray
-    int n2 = right - mid;              //size of right subarray 
-    int L[n1], R[n2];                  //temp arrays
-
-    //copying data to temp arrays
-    for (int i = 0; i < n1; i++)
+    int i = left;
+    int j = mid + 1;
+    int k = left;
+    while (i <= mid && j <= right)
     {
-        L[i] = arr[left + i];          
-    }
-    for (int j = 0; j < n2; j++)
-    {
-        R[j] = arr[mid + 1 + j];
-    }
-
-    int i = 0, j = 0, k = left;        //initial index of first, second and merged subarray
-    
-    while (i < n1 && j < n2)           //merging temp arrays to main array
-    {
-        if (L[i] <= R[j])              //if left element is smaller than right element
+        if (arr[i] <= arr[j])
         {
-            arr[k] = L[i];             //copy left element to main array
-            i++;
+            temp[k++] = arr[i++];
         }
         else
         {
-            arr[k] = R[j];             //copy right element to main array
-            j++;
+            temp[k++] = arr[j++];
         }
-        k++;
     }
-
-    //copying remaining elements of left subarray
-    while (i < n1)
+    while (i <= mid)
     {
-        arr[k] = L[i];
-        i++;
-        k++;
+        temp[k++] = arr[i++];
     }
-    
-    //copying remaining elements of right subarray
-    while (j < n2)
+    while (j <= right)
     {
-        arr[k] = R[j];
-        j++;
-        k++;
+        temp[k++] = arr[j++];
+    }
+    for (int i = left; i <= right; i++)
+    {
+        arr[i] = temp[i];
     }
 }
 
-void bottomUp_merge_sort(int *arr, int left, int right)
+void bottomUp_merge_sort(int *arr, int temp[], int left, int right)
 {
-    if (left < right)
+    int mid;
+    for (int i = 1; i <= right - left; i = 2 * i)
     {
-        int mid = left + (right - left) / 2;      //finding mid point
-        bottomUp_merge_sort(arr, left, mid);               //sorting left subarray
-        bottomUp_merge_sort(arr, mid + 1, right);          //sorting right subarray
-        merge(arr, left, mid, right);             //merging left and right subarrays
+        for (int j = left; j < right; j += 2 * i)
+        {
+            mid = j + i - 1;
+            int end = min(j + 2 * i - 1, right);
+            merge(arr, temp, j, mid, end);
+        }
     }
 }
 
 int main()
 {
-    int arr[] = { 12, 11, 13, 5, 6, 7, 8, 0, 24, 73, 64, 18, 17, 73, 62 };
+    int arr[] = {12, 11, 13, 5, 6, 7, 8, 0, 24, 73, 64, 18, 17, 73, 62};
     int arr_size = sizeof(arr) / sizeof(arr[0]);
-    bottomUp_merge_sort(arr, 0, arr_size - 1);
+    int temp[arr_size];
+    bottomUp_merge_sort(arr, temp, 0, arr_size - 1);
     for (int i = 0; i < arr_size; i++)
     {
         cout << arr[i] << " ";
