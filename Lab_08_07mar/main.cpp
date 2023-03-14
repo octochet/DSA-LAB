@@ -310,7 +310,6 @@ public:
 int main() {
     int n, k;
     cin >> n >> k;
-
     vector<point> points(n);
     for(int i = 0; i < n; i++) {
         cin >> points[i].x >> points[i].y;
