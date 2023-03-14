@@ -1,173 +1,265 @@
-#include<iostream>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
 
 using namespace std;
 
-//skip list node
-struct node {
-    int data;   //data
-    node *next; //pointer to next node
-    node *down; //pointer to down node
+// Skip list node structure
+struct Node
+{
+    int key;
+    int value;
+    Node **forward; // array of pointers to forward nodes
+    Node(int level, int key, int value)
+    {
+        this->key = key;
+        this->value = value;
+        forward = new Node *[level + 1];
+        memset(forward, 0, sizeof(Node *) * (level + 1));
+    }
+    ~Node()
+    {
+        delete[] forward;
+    }
 };
 
-//skip list class
-class skip_list {
-    node *head; //head pointer
-    node *tail; //tail pointer
-    int size;   //size of skip list
-    int level;  //level of skip list
+// Skip list class
+class SkipList
+{
 public:
-    skip_list();       //constructor
-    void insert(int);  //insert function
-    void display();   //display function
-    void search(int); //search function
-    void remove(int); //remove function
+    // Constructor
+    SkipList(int max_level, float p)
+    {
+        this->max_level = max_level;
+        this->p = p;
+        level = 0;
+        head = new Node(max_level, -1, -1);
+    }
+    // Destructor
+    ~SkipList()
+    {
+        Node *current = head;
+        while (current != nullptr)
+        {
+            Node *temp = current;
+            current = current->forward[0];
+            delete temp;
+        }
+    }
+    // Insert a key-value pair into the skip list
+    void insert(int key, int value)
+    {
+        Node *current = head;
+        Node *update[max_level + 1];
+        memset(update, 0, sizeof(Node *) * (max_level + 1));
+        for (int i = level; i >= 0; i--)
+        {
+            while (current->forward[i] != nullptr && current->forward[i]->key < key)
+            {
+                current = current->forward[i];
+            }
+            update[i] = current;
+        }
+        current = current->forward[0];
+        if (current == nullptr || current->key != key)
+        {
+            int new_level = randomLevel();
+            if (new_level > level)
+            {
+                for (int i = level + 1; i <= new_level; i++)
+                {
+                    update[i] = head;
+                }
+                level = new_level;
+            }
+            Node *n = new Node(new_level, key, value);
+            for (int i = 0; i <= new_level; i++)
+            {
+                n->forward[i] = update[i]->forward[i];
+                update[i]->forward[i] = n;
+            }
+        }
+    }
+
+    // Delete a node with a given key from the skip list
+    void remove(int key)
+    {
+        Node *current = head;
+        Node *update[max_level + 1];
+        memset(update, 0, sizeof(Node *) * (max_level + 1));
+        for (int i = level; i >= 0; i--)
+        {
+            while (current->forward[i] != nullptr && current->forward[i]->key < key)
+            {
+                current = current->forward[i];
+            }
+            update[i] = current;
+        }
+        current = current->forward[0];
+        if (current != nullptr && current->key == key)
+        {
+            for (int i = 0; i <= level; i++)
+            {
+                if (update[i]->forward[i] != current)
+                {
+                    break;
+                }
+                update[i]->forward[i] = current->forward[i];
+            }
+            delete current;
+            while (level > 0 && head->forward[level] == nullptr)
+            {
+                level--;
+            }
+        }
+    }
+
+    // Search for a node with a given key in the skip list
+    bool search(int key)
+    {
+        Node *current = head;
+        for (int i = level; i >= 0; i--)
+        {
+            while (current->forward[i] != nullptr && current->forward[i]->key < key)
+            {
+                current = current->forward[i];
+            }
+        }
+        current = current->forward[0];
+        return current != nullptr && current->key == key;
+    }
+
+    // Print the skip list
+    void print()
+    {
+        cout << "Skip list:" << endl;
+        for (int i = 0; i <= level; i++)
+        {
+            Node *node = head->forward[i];
+            cout << "Level " << i << ": ";
+            while (node != nullptr)
+            {
+                cout << node->key << " ";
+                node = node->forward[i];
+            }
+            cout << endl;
+        }
+    }
+
+    // Get the size of the skip list
+    int getSize()
+    {
+        int size = 0;
+        Node *node = head->forward[0];
+        while (node != nullptr)
+        {
+            size++;
+            node = node->forward[0];
+        }
+        return size;
+    }
+
+    // Get the height of the skip list
+    int getHeight()
+    {
+        return level;
+    }
+
+private:
+    int max_level; // maximum level of skip list
+    float p;       // probability of increasing level
+    int level;     // current level of skip list
+    Node *head;    // pointer to head node
+    // Generate a random level for a new node
+    int randomLevel()
+    {
+        int level = 0;
+        while (((float)rand() / RAND_MAX) < p && level < max_level)
+        {
+            level++;
+        }
+        return level;
+    }
 };
 
-//constructor
-skip_list::skip_list() {
-    head = new node;    //create head node
-    tail = new node;    //create tail node
-    head->data = -1;    //assign -1 to head node
-    tail->data = -1;    //assign -1 to tail node
-    head->next = tail;  //link head and tail
-    head->down = NULL;  //assign NULL to head down pointer
-    tail->next = NULL;  //assign NULL to tail next pointer
-    tail->down = NULL;  //assign NULL to tail down pointer
-    size = 0;        //assign 0 to size
-    level = 0;      //assign 0 to level
+void test()
+{
+    SkipList list(3, 0.5);
+    list.insert(3, 3);
+    list.insert(6, 6);
+    list.insert(7, 7);
+    list.insert(9, 9);
+    list.insert(12, 12);
+    list.insert(19, 19);
+    list.insert(17, 17);
+    list.insert(26, 26);
+    list.insert(21, 21);
+    list.insert(25, 25);
+    list.print();
+    cout << "Size: " << list.getSize() << endl;
+    cout << "Height: " << list.getHeight() << endl;
+    cout << "Search for 19: " << list.search(19) << endl;
+    cout << "Search for 15: " << list.search(15) << endl;
+    list.remove(19);
+    list.remove(15);
+    list.print();
+    cout << "Size: " << list.getSize() << endl;
+    cout << "Height: " << list.getHeight() << endl;
 }
 
-//insert function
-void skip_list::insert(int x) {
-    node *temp = head;  //create a temporary node
-    node *prev = NULL;  //create a previous node
-    node *new_node = new node;  //create a new node
-    new_node->data = x; //assign x to new node
-    new_node->next = NULL;  //assign NULL to new node next pointer
-    new_node->down = NULL;  //assign NULL to new node down pointer
-    while (temp != NULL) {  //traverse the skip list
-        if (temp->data == x) {  //if element already exists
-            cout << "Element already exists" << endl;   //print message
-            return; //return
-        }   
-        if (temp->data < x) {   //if element is less than x
-            prev = temp;    //assign temp to prev
-            temp = temp->next;  //assign temp next to temp
-        }
-        else {  //if element is greater than x
-            if (temp->down == NULL) {   //if temp down is NULL
-                prev->next = new_node;  //link new node to prev
-                new_node->next = temp;  //link temp to new node
-                size++; //increment size
-                break;  //break
-            }
-            else {  //if temp down is not NULL
-                prev = temp;    //assign temp to prev
-                temp = temp->down;  //assign temp down to temp
-            }
-        }
-    }
-    int r = rand() % 2; //generate random number
-    if (r == 1) {   //if random number is 1
-        node *new_head = new node;  //create a new head node
-        new_head->data = -1;    //assign -1 to new head node
-        new_head->next = new_node;  //link new node to new head
-        new_head->down = head;  //link head to new head
-        head = new_head;    //assign new head to head
-        level++;    //increment level
-    }
-}
+int main()
+{
+    srand((unsigned)time(0)); // initialize random seed
+    test();
 
-//display function
-void skip_list::display() {
-    node *temp = head;  //create a temporary node
-    while (temp != NULL) {  //traverse the skip list
-        node *temp1 = temp; //create a temporary node
-        while (temp1 != NULL) { //traverse the skip list
-            cout << temp1->data << " "; //print data
-            temp1 = temp1->next;    //assign temp1 next to temp1
-        }   
-        cout << endl;   
-        temp = temp->down;  //assign temp down to temp
-    }
-}
-
-//search function
-void skip_list::search(int x) {
-    node *temp = head;  //create a temporary node
-    while (temp != NULL) {  //traverse the skip list
-        if (temp->data == x) {  //if element is found
-            cout << "Element found" << endl;    //print message
-            return;
-        }
-        if (temp->data < x) {       //if element is less than x
-            temp = temp->next;  //assign temp next to temp
-        }   
-        else {  //if element is greater than x
-            temp = temp->down;  //assign temp down to temp
-        }
-    }
-    cout << "Element not found" << endl;    //print message
-}
-
-//remove function
-void skip_list::remove(int x) {
-    node *temp = head;  //create a temporary node
-    node *prev = NULL;  //create a previous node
-    while (temp != NULL) {  //traverse the skip list
-        if (temp->data == x) {  //if element is found
-            prev->next = temp->next;    //link temp next to prev
-            delete temp;    //delete temp
-            size--; //decrement size
-            return; 
-        }
-        if (temp->data < x) {   //if element is less than x
-            prev = temp;    //assign temp to prev
-            temp = temp->next;  //assign temp next to temp
-        }   
-        else {  //if element is greater than x
-            temp = temp->down;  //assign temp down to temp
-        }
-    }
-    cout << "Element not found" << endl;    //print message
-}
-
-//main function
-int main() {
-    skip_list s;
-    int choice, x;
-    //menu driven program
-    while (1) { 
-        cout << "1. Insert" << endl;
-        cout << "2. Display" << endl;
-        cout << "3. Search" << endl;
-        cout << "4. Remove" << endl;
+    cout << "Skip List Implementation" << endl;
+    cout << "enter the max level of the skip list: ";
+    int max_level;
+    cin >> max_level;
+    cout << "enter the probability of increasing level: ";
+    float p;
+    cin >> p;
+    SkipList list(max_level, p);
+    // switch case
+    while (true)
+    {
+        int choice;
+        cout << "1. Insert element into the list" << endl;
+        cout << "2. Delete element from the list" << endl;
+        cout << "3. Search element from the list" << endl;
+        cout << "4. Print Skip List" << endl;
         cout << "5. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
-        switch (choice) {
+        switch (choice)
+        {
         case 1:
-            cout << "Enter the element to be inserted: ";
+            cout << "Enter element to be inserted: ";
+            int x;
             cin >> x;
-            s.insert(x);
+            list.insert(x, rand() % 100);
             break;
         case 2:
-            s.display();
+            cout << "Enter element to be deleted: ";
+            cin >> x;
+            list.remove(x);
             break;
         case 3:
-            cout << "Enter the element to be searched: ";
+            cout << "Enter element to be searched: ";
             cin >> x;
-            s.search(x);
+            if (list.search(x))
+                cout << "Found" << endl;
+            else
+                cout << "Not Found" << endl;
             break;
         case 4:
-            cout << "Enter the element to be removed: ";
-            cin >> x;
-            s.remove(x);
+            list.print();
             break;
         case 5:
-            exit(0);
+            exit(1);
         default:
-            cout << "Invalid choice" << endl;
+            cout << "Wrong choice" << endl;
         }
     }
     return 0;
