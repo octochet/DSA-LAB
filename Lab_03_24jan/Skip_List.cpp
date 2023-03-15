@@ -50,10 +50,10 @@ public:
     // Insert a key-value pair into the skip list
     void insert(int key, int value)
     {
-        Node *current = head; // start from head node
-        Node *update[max_level + 1];  // array of pointers to update nodes
+        Node *current = head;                                // start from head node
+        Node *update[max_level + 1];                         // array of pointers to update nodes
         memset(update, 0, sizeof(Node *) * (max_level + 1)); // initialize update array as 0
-        for (int i = level; i >= 0; i--) 
+        for (int i = level; i >= 0; i--)
         {
             while (current->forward[i] != nullptr && current->forward[i]->key < key)
             {
@@ -74,6 +74,7 @@ public:
                 level = new_level;
             }
             Node *n = new Node(new_level, key, value);
+            size++;
             for (int i = 0; i <= new_level; i++)
             {
                 n->forward[i] = update[i]->forward[i];
@@ -108,6 +109,7 @@ public:
                 update[i]->forward[i] = current->forward[i];
             }
             delete current;
+            size--;
             while (level > 0 && head->forward[level] == nullptr)
             {
                 level--;
@@ -130,7 +132,7 @@ public:
         return current != nullptr && current->key == key;
     }
 
-    // Print the skip list 
+    // Print the skip list
     void print()
     {
         cout << "Skip list:" << endl;
@@ -160,6 +162,11 @@ public:
         return size;
     }
 
+    void printSize()
+    {
+        cout << "print Size: " << size << endl;
+    }
+
     // Get the height of the skip list
     int getHeight()
     {
@@ -167,6 +174,7 @@ public:
     }
 
 private:
+    int size = 0;
     int max_level; // maximum level of skip list
     float p;       // probability of increasing level
     int level;     // current level of skip list
@@ -205,10 +213,12 @@ void test1()
     list.remove(15);
     list.print();
     cout << "Size: " << list.getSize() << endl;
+    list.printSize();
     cout << "Height: " << list.getHeight() << endl;
 }
 
-void test2() {
+void test2()
+{
     cout << "enter the max level of the skip list: ";
     int max_level;
     cin >> max_level;
@@ -224,7 +234,8 @@ void test2() {
         cout << "2. Delete element from the list" << endl;
         cout << "3. Search element from the list" << endl;
         cout << "4. Print Skip List" << endl;
-        cout << "5. Exit" << endl;
+        cout << "5. Print size" << endl;
+        cout << "6. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
         switch (choice)
@@ -252,6 +263,9 @@ void test2() {
             list.print();
             break;
         case 5:
+            list.printSize();
+            break;
+        case 6:
             exit(1);
         default:
             cout << "Wrong choice" << endl;
@@ -264,10 +278,10 @@ int main()
     srand((unsigned)time(0)); // initialize random seed
     cout << "Skip List Implementation" << endl;
 
-    //predefined test case
-    test1();
+    // // predefined test case
+    // test1();
 
-    // //user defined test case
-    // test2();   
+    //user defined test case
+    test2();
     return 0;
 }
