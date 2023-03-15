@@ -50,10 +50,10 @@ public:
     // Insert a key-value pair into the skip list
     void insert(int key, int value)
     {
-        Node *current = head;
-        Node *update[max_level + 1];
-        memset(update, 0, sizeof(Node *) * (max_level + 1));
-        for (int i = level; i >= 0; i--)
+        Node *current = head; // start from head node
+        Node *update[max_level + 1];  // array of pointers to update nodes
+        memset(update, 0, sizeof(Node *) * (max_level + 1)); // initialize update array as 0
+        for (int i = level; i >= 0; i--) 
         {
             while (current->forward[i] != nullptr && current->forward[i]->key < key)
             {
@@ -130,11 +130,11 @@ public:
         return current != nullptr && current->key == key;
     }
 
-    // Print the skip list
+    // Print the skip list 
     void print()
     {
         cout << "Skip list:" << endl;
-        for (int i = 0; i <= level; i++)
+        for (int i = level; i >= 0; i--)
         {
             Node *node = head->forward[i];
             cout << "Level " << i << ": ";
@@ -183,19 +183,19 @@ private:
     }
 };
 
-void test()
+void test1()
 {
     SkipList list(3, 0.5);
-    list.insert(3, 3);
-    list.insert(6, 6);
-    list.insert(7, 7);
-    list.insert(9, 9);
-    list.insert(12, 12);
-    list.insert(19, 19);
-    list.insert(17, 17);
-    list.insert(26, 26);
-    list.insert(21, 21);
-    list.insert(25, 25);
+    list.insert(3, 0);
+    list.insert(6, 0);
+    list.insert(7, 0);
+    list.insert(9, 0);
+    list.insert(12, 0);
+    list.insert(19, 0);
+    list.insert(17, 0);
+    list.insert(26, 0);
+    list.insert(21, 0);
+    list.insert(25, 0);
     list.print();
     cout << "Size: " << list.getSize() << endl;
     cout << "Height: " << list.getHeight() << endl;
@@ -208,12 +208,7 @@ void test()
     cout << "Height: " << list.getHeight() << endl;
 }
 
-int main()
-{
-    srand((unsigned)time(0)); // initialize random seed
-    test();
-
-    cout << "Skip List Implementation" << endl;
+void test2() {
     cout << "enter the max level of the skip list: ";
     int max_level;
     cin >> max_level;
@@ -238,7 +233,7 @@ int main()
             cout << "Enter element to be inserted: ";
             int x;
             cin >> x;
-            list.insert(x, rand() % 100);
+            list.insert(x, 0);
             break;
         case 2:
             cout << "Enter element to be deleted: ";
@@ -262,5 +257,17 @@ int main()
             cout << "Wrong choice" << endl;
         }
     }
+}
+
+int main()
+{
+    srand((unsigned)time(0)); // initialize random seed
+    cout << "Skip List Implementation" << endl;
+
+    //predefined test case
+    test1();
+
+    // //user defined test case
+    // test2();   
     return 0;
 }
