@@ -1,0 +1,13 @@
+01. insert from given inorder and postorder sequence✅
+02. remove✅
+03. search✅
+04. inOrder/postOrder/preOrder✅
+05. levelorder✅
+06. isBST✅
+07. predecessor✅
+08. successor✅
+09. select - Kth smallest✅
+10. diameter✅
+11. height✅
+12. lowestCommonAncestor✅
+13. maximum path sum✅
