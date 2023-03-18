@@ -2,6 +2,7 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
@@ -82,52 +83,44 @@ Node* insert(Node* root, const HorizontalLine& line) {
     return balance(root);
 }
 
+class compare {
+public:
+    bool operator()(const VerticalLine& a, const VerticalLine& b) {
+        return a.x < b.x;
+    }
+};
+
 // Define the AVL tree
 Node* activeLines = nullptr;
 
 // Define the line sweep algorithm
-set<pair<int, int>> findIntersections(const vector<VerticalLine>& verticalLines, const vector<HorizontalLine>& horizontalLines) {
-    // Process each vertical line in order
+set<pair<int, int>> findIntersections(priority_queue<VerticalLine, vector<VerticalLine>, compare>& verticalLines, vector<HorizontalLine>& horizontalLines) {
     set<pair<int, int>> intersections;
-    for (const auto& vl : verticalLines) {
-        // Add any intersecting horizontal lines to the AVL tree
-        for (const auto& hl : horizontalLines) {
-            if (hl.y >= vl.y1 && hl.y <= vl.y2 && hl.x1 <= vl.x) {
-                activeLines = insert(activeLines, hl);
+    while (!verticalLines.empty()) {
+        VerticalLine v = verticalLines.top();
+        verticalLines.pop();
+        HorizontalLine h1;
+        for (const auto& h : horizontalLines) {
+             h1 = h;
+            if (h.y >= v.y1 && h.y <= v.y2 && h.x1 <= v.x && h.x2 >= v.x) {
+                intersections.insert({v.x, h.y});
             }
         }
-
-        // Remove any non-intersecting horizontal lines from the AVL tree
-        for (auto it = activeLines; it != nullptr;) {
-            const auto& hl = it->line;
-            if (hl.y > vl.y2) {
-                break;
-            }
-            if (hl.y >= vl.y1 && hl.y <= vl.y2 && hl.x2 >= vl.x) {
-                intersections.insert({vl.x, hl.y});
-            }
-            it = it->right;
-        }
-
-        // Find any intersections between the active horizontal lines and the vertical line
-        for (auto it = activeLines; it != nullptr; it = it->right) {
-            const auto& hl = it->line;
-            if (hl.y > vl.y2) {
-                break;
-            }
-            if (hl.y >= vl.y1 && hl.y <= vl.y2 && hl.x2 >= vl.x) {
-                intersections.insert({vl.x, hl.y});
-            }
-        }
+        activeLines = insert(activeLines, h1);
     }
     return intersections;
 }
 
 // Example usage:
 int main() {
-    vector<VerticalLine> verticalLines = {{1, 1, 5}, {3, 2, 6}, {5, 4, 8}, {-2, 1, 5}};  // x, y1, y2  
+    //store vertical lines in priorty queue
+    priority_queue <VerticalLine, vector<VerticalLine>, compare> verticalLines;
+    verticalLines.push({1, 2, 4});
+    verticalLines.push({3, 1, 5});
+    verticalLines.push({5, 3, 6});
+    verticalLines.push({-2, 1, 5});
     vector<HorizontalLine> horizontalLines = {{2, -3, 4}, {4, 1, 5}, {7, 3, 6}};  // y, x1, x2
-    sort(verticalLines.begin(), verticalLines.end(), [](const VerticalLine& a, const VerticalLine& b) { return a.x < b.x; } );
+    
     set<pair<int, int>> intersections = findIntersections(verticalLines, horizontalLines);
     cout << "Intersections:" << endl;
     for (const auto& p : intersections) {
