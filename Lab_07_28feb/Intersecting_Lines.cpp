@@ -83,6 +83,40 @@ Node* insert(Node* root, const HorizontalLine& line) {
     return balance(root);
 }
 
+// function to delete a horizontal line from the AVL tree
+Node* deleteLine(Node* root, const HorizontalLine& line) {
+    if (root == nullptr) {
+        return nullptr;
+    } else if (line.y < root->line.y) {
+        root->left = deleteLine(root->left, line);
+    } else if (line.y > root->line.y) {
+        root->right = deleteLine(root->right, line);
+    } else {
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root;
+            return nullptr;
+        } else if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        } else {
+            Node* temp = root->right;
+            while (temp->left != nullptr) {
+                temp = temp->left;
+            }
+            root->line = temp->line;
+            root->right = deleteLine(root->right, temp->line);
+        }
+    }
+    root->height = max(height(root->left), height(root->right)) + 1;
+    return balance(root);
+}
+
+
 class compare {
 public:
     bool operator()(const VerticalLine& a, const VerticalLine& b) {
@@ -93,23 +127,28 @@ public:
 // Define the AVL tree
 Node* activeLines = nullptr;
 
-// Define the line sweep algorithm
+// Define the line sweep algorithm using an AVL tree
 set<pair<int, int>> findIntersections(priority_queue<VerticalLine, vector<VerticalLine>, compare>& verticalLines, vector<HorizontalLine>& horizontalLines) {
     set<pair<int, int>> intersections;
     while (!verticalLines.empty()) {
-        VerticalLine v = verticalLines.top();
+        VerticalLine line = verticalLines.top();
         verticalLines.pop();
-        HorizontalLine h1;
-        for (const auto& h : horizontalLines) {
-             h1 = h;
-            if (h.y >= v.y1 && h.y <= v.y2 && h.x1 <= v.x && h.x2 >= v.x) {
-                intersections.insert({v.x, h.y});
+        for (const auto& hLine : horizontalLines) {
+            if (hLine.y >= line.y1 && hLine.y <= line.y2 && hLine.x1 <= line.x && hLine.x2 >= line.x) {
+                intersections.insert({line.x, hLine.y});
             }
         }
-        activeLines = insert(activeLines, h1);
+        if (line.y1 < line.y2) {
+            activeLines = insert(activeLines, {line.y1, line.x, line.x});
+            activeLines = insert(activeLines, {line.y2, line.x, line.x});
+        } else {
+            activeLines = deleteLine(activeLines, {line.y1, line.x, line.x});
+            activeLines = deleteLine(activeLines, {line.y2, line.x, line.x});
+        }
     }
     return intersections;
 }
+
 
 // Example usage:
 int main() {
