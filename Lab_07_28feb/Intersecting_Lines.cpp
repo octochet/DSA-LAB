@@ -130,21 +130,25 @@ Node* activeLines = nullptr;
 // Define the line sweep algorithm using an AVL tree
 set<pair<int, int>> findIntersections(priority_queue<VerticalLine, vector<VerticalLine>, compare>& verticalLines, vector<HorizontalLine>& horizontalLines) {
     set<pair<int, int>> intersections;
+    sort(horizontalLines.begin(), horizontalLines.end(), [](const HorizontalLine& a, const HorizontalLine& b) {
+        return a.y < b.y;
+    });
+    int i = 0;
     while (!verticalLines.empty()) {
         VerticalLine line = verticalLines.top();
         verticalLines.pop();
-        for (const auto& hLine : horizontalLines) {
-            if (hLine.y >= line.y1 && hLine.y <= line.y2 && hLine.x1 <= line.x && hLine.x2 >= line.x) {
-                intersections.insert({line.x, hLine.y});
+        while (i < horizontalLines.size() && horizontalLines[i].y <= line.y2) {
+            activeLines = insert(activeLines, horizontalLines[i]);
+            i++;
+        }
+        Node* temp = activeLines;
+        while (temp != nullptr) {
+            if (temp->line.x1 <= line.x && temp->line.x2 >= line.x) {
+                intersections.insert({line.x, temp->line.y});
             }
+            temp = temp->right;
         }
-        if (line.y1 < line.y2) {
-            activeLines = insert(activeLines, {line.y1, line.x, line.x});
-            activeLines = insert(activeLines, {line.y2, line.x, line.x});
-        } else {
-            activeLines = deleteLine(activeLines, {line.y1, line.x, line.x});
-            activeLines = deleteLine(activeLines, {line.y2, line.x, line.x});
-        }
+        activeLines = deleteLine(activeLines, {line.y1, line.x, line.x});
     }
     return intersections;
 }
