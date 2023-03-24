@@ -63,6 +63,10 @@ public:
         inOrder(root);
     }
 
+    void inOrder2(){
+        inOrder2(root);
+    }
+
     // Print the tree contents in postorder.
     void postOrder(){
         postOrder(root);
@@ -222,6 +226,36 @@ private:
         inOrder(t->right);
     }
 
+    //inorder without recursion/stack and using constant space
+    void inOrder2(BinaryNode *t){
+        BinaryNode *p = t; // p is the current node
+        while (p != NULL) // while p is not NULL
+        {
+            if (p->left == NULL)   // if p has no left child
+            {
+                cout << p->element << " "; // print p
+                p = p->right; // move to p's right child
+            }
+            else
+            {
+                BinaryNode *q = p->left;  // q is p's left child
+                while (q->right != NULL && q->right != p) // find p's inorder predecessor
+                    q = q->right;   // q is p's inorder predecessor
+                if (q->right == NULL)   // if q's right child is NULL
+                {
+                    q->right = p;   // make q's right child point to p
+                    p = p->left;    // move to p's left child
+                }
+                else
+                {
+                    q->right = NULL;    // restore q's right child
+                    cout << p->element << " ";  // print p
+                    p = p->right;   // move to p's right child
+                }
+            }
+        }
+    }
+
     // postorder definition
     void postOrder(BinaryNode *t){
         if (t == NULL)
@@ -266,17 +300,9 @@ private:
         return t;
     }
 
-    // isBST definition
+    // isBST optimized recursive solution  
     bool isBST(BinaryNode *t){
-        if (t == NULL)
-            return true;
-        if (t->left != NULL && findMax(t->left)->element > t->element)
-            return false;
-        if (t->right != NULL && findMin(t->right)->element < t->element)
-            return false;
-        if (!isBST(t->left) || !isBST(t->right))
-            return false;
-        return true;
+        
     }
 
     // predecessor definition
@@ -419,6 +445,7 @@ int main()
 
     //q4
     cout<<"inorder: ";t.inOrder();cout<<endl;
+    cout<<"inorder2: ";t.inOrder2();cout<<endl;
     cout<<"postorder: ";t.postOrder();cout<<endl;
     cout<<"preorder: ";t.preOrder();cout<<endl;
 
