@@ -202,7 +202,7 @@ private:
             return false;
         else if (x < t->element)
             return search(x, t->left);
-        else if (t->element < x)
+        else if (x > t->element)
             return search(x, t->right);
         else
             return true;    // Match
@@ -302,7 +302,9 @@ private:
 
     // isBST optimized recursive solution  
     bool isBST(BinaryNode *t){
-        
+        if(t == nullptr) {
+            return true;
+        } 
     }
 
     // predecessor definition
