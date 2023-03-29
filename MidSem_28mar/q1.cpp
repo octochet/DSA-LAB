@@ -4,7 +4,9 @@
 
 using namespace std;
 
+//data structure for tree with node which has key, priority, left and right child.
 //new bst class, bst property for key, max heap property for priority
+
 class newBST
 {
 public:
@@ -24,18 +26,8 @@ public:
     }
 
     //extract max until empty
-    void empty(){
-        extractMaxUntilEmpty();
-    }
-
-    //inorder
-    void inorder() {
-        inorder(root);
-    }
-
-    //preorder
-    void preorder() {
-        preorder(root);
+    void extractMaxUntilEmpty(){
+        extractMaxUntilEmpty(root);
     }
 
     //levelorder
@@ -43,7 +35,13 @@ public:
         levelorder(root);
     }
 
+    //get root
+    void getRoot() {
+        getRoot(root);
+    }
+
 private:
+
     struct node
     {
         int key;  
@@ -55,134 +53,78 @@ private:
     };
 
     node *root;
-    int maxPriority = INT32_MIN;
-    bool isEmpty=true;
-    //right rotate
-    node *rightRotate(node *root) {
-        node *t = root->left;
-        node *u = t->right;
-        t->right = root;
-        root->left = u;
-        return t;
+
+    //left rotation
+    void rotateWithLeftChild(node *&k2) {
+        node *k1 = k2->left;
+        k2->left = k1->right;
+        k1->right = k2;
+        k2 = k1;
     }
 
-    //left rotate
-    node* leftRotate(node *root) {
-        node *t = root->right;
-        node *u = t->left;
-        t->left = root;
-        root->right = u;
-        return t;
+    //right rotation
+    void rotateWithRightChild(node *&k1) {
+        node *k2 = k1->right;
+        k1->right = k2->left;
+        k2->left = k1;
+        k1 = k2;
     }
 
-    //insert heap fixup definition
-    void insertFix(int key, int priority, node *root) {
-        
-        if(root->left!=NULL && root->priority < root->left->priority) {
-            root = rightRotate(root);
-        } else if(root->right!=NULL && root->priority < root->right->priority) {
-            root = leftRotate(root);
-        } else { }
-    }
-
-    //insert definition
-    void insert(int key, int priority, node *&root) {
-        if(root == NULL) {
-            isEmpty=false;
-            root = new node(key, priority, NULL, NULL);
-            if(priority > maxPriority) {
-                maxPriority = priority;
-            }
-        } else if(key < root->key) {
-            insert(key, priority, root->left);
-            if(root->priority < root->left->priority) {
-                root = rightRotate(root);
-            }
-        } else if(key > root->key) {
-            insert(key, priority, root->right);
-            if(root->priority < root->right->priority) {
-                root = leftRotate(root);
-            }
-        } else { }
-    }
-
-    // find minimum node definition
-    node* findMin(node *t) {
+    //insert function
+    void insert(int key, int priority, node *&t) {
         if (t == NULL)
-            return NULL;
-        if (t->left == NULL)
-            return t;
-        return findMin(t->left);
+            t = new node(key, priority, NULL, NULL);
+        else if (key < t->key) {
+            insert(key, priority, t->left);
+            if (t->left->priority > t->priority)
+                rotateWithLeftChild(t);
+        }
+        else if (key > t->key) {
+            insert(key, priority, t->right);
+            if (t->right->priority > t->priority)
+                rotateWithRightChild(t);
+        }
+        else
+            ;  // Duplicate; do nothing
     }
 
-    //bst delete/remove node definition
-    void remove(int key, int priority, node *&t) {
-        if(t==NULL) {
+    //extract max priority 
+    void extractMaxPriority(node *&t) {
+        if (t == NULL)
             return;
+        else if (t->left == NULL && t->right == NULL) {
+            delete t;
+            t = NULL;
         }
-        if(key < t->key) {
-            remove(key, priority, t->left);
-        } else if(key > t->key) {
-            remove(key, priority, t->right);
-        } else if(t->left != NULL && t->right != NULL) {
-            node *temp = findMin(t->right);
-            t->key = temp->key;
-            t->priority = temp->priority;
-            remove(t->key, t->priority, t->right); 
-        } else {
-            node* oldNode = t;
-            t = (t->left != NULL) ? t->left : t->right;
-            delete oldNode;
+        else if (t->left == NULL) {
+            node *temp = t;
+            t = t->right;
+            delete temp;
         }
-    }
-
-    //extract max definition
-    void extractMaxPriority(node* t) {
-        if(root->left==NULL && root->right==NULL) {
-            cout<<"max key:"<<root->key<<" max priority: "<<root->priority<<endl;
-            remove(t->key, t->priority, root);
-            isEmpty=true;
-            return;
+        else if (t->right == NULL) {
+            node *temp = t;
+            t = t->left;
+            delete temp;
         }
-        cout<<"max key:"<<root->key<<" max priority: "<<root->priority<<endl;
-        remove(t->key, t->priority, root);
-        if(root->right!=NULL && root->priority < root->right->priority) {
-            root = leftRotate(root);
+        else if (t->left->priority > t->right->priority) {
+            rotateWithLeftChild(t);
+            extractMaxPriority(t->right);
         }
-        if(root->left!=NULL && root->priority < root->left->priority) {
-            root = rightRotate(root);
+        else {
+            rotateWithRightChild(t);
+            extractMaxPriority(t->left);
         }
     }
 
-    //inorder traversal
-    void inorder(node *root) {
-        if(root == NULL) {
-            return;
-        } else {
-            inorder(root->left);
-            cout << root->key << " " << root->priority << " " << endl;
-            inorder(root->right);
-        }
+    bool isEmpty() {
+        return root == NULL;
     }
 
-    //preorder traversal
-    void preorder(node *root) {
-        if(root == NULL) {
-            return;
-        } else {
-            cout << root->key << " " << root->priority << " " << endl;
-            preorder(root->left);
-            preorder(root->right);
-        }
-    }
-
-    void extractMaxUntilEmpty() {
-        while(!isEmpty) {
-            extractMaxPriority();
-            // cout<<"inorder: "<<endl;
-            // inorder();
-            // cout<<"preorder: "<<endl;
-            // preorder();
+    void extractMaxUntilEmpty(node *root) {
+        while(!isEmpty()) {
+            cout<<"extracting max priority: ";
+            getRoot();
+            extractMaxPriority();cout<<endl;
             cout<<"level order: "<<endl;
             levelorder();
         }
@@ -225,6 +167,10 @@ private:
             printf("\n");
         }
     }
+
+    void getRoot(node *&t) {
+        printf("root: (%d,%d)", t->key, t->priority);
+    }
 };
 
 void test1() {
@@ -232,27 +178,30 @@ void test1() {
     bst.insert(20, 92);
     bst.insert(50, 73);
     bst.insert(30, 48);
-    bst.insert(60, 55);
+    bst.insert(10, 55);
     bst.insert(40, 21);
     bst.insert(70, 50);
     bst.insert(80, 44);
 
     cout<<"Initial Tree:"<<endl;
     cout<<"level order: "<<endl;
-    bst.levelorder();
-    // cout<<"inorder: "<<endl;
-    // bst.inorder();
-    // cout<<"preorder: "<<endl;
-    // bst.preorder();
+    bst.levelorder();cout<<endl;
 
-    // cout<<"after Max Extraction:"<<endl;
-    // bst.extractMaxPriority();
-    // cout<<"inorder: "<<endl;
-    // bst.inorder();
-    // cout<<"preorder: "<<endl;
-    // bst.preorder();
+    bst.extractMaxPriority();
+    cout<<"After extract max priority:"<<endl;
+    cout<<"level order: "<<endl;
+    bst.levelorder();cout<<endl;
 
-    bst.empty();
+    bst.getRoot();cout<<endl;
+
+    bst.extractMaxPriority();
+    cout<<"After extract max priority:"<<endl;
+    cout<<"level order: "<<endl;
+    bst.levelorder();cout<<endl;
+
+    bst.getRoot();cout<<endl;
+
+    // bst.extractMaxUntilEmpty();
 }
 
 void test2() {
@@ -267,26 +216,14 @@ void test2() {
 
     cout<<"Initial Tree:"<<endl;
     cout<<"level order: "<<endl;
-    bst.levelorder();
-    // cout<<"inorder: "<<endl;
-    // bst.inorder();
-    // cout<<"preorder: "<<endl;
-    // bst.preorder();
+    bst.levelorder();cout<<endl;
 
-    // cout<<"after Max Extraction:"<<endl;
-    // bst.extractMaxPriority();
-    // cout<<"inorder: "<<endl;
-    // bst.inorder();
-    // cout<<"preorder: "<<endl;
-    // bst.preorder();
-
-    bst.empty();
+    bst.extractMaxUntilEmpty();
 }
 
 
 int main() {
-    newBST bst;
-    int t;
+    int t=1;
     while(t!=0) {
         cout<<"Enter 1 to test1, 2 to test2, 0 to exit: ";
         cin>>t;
