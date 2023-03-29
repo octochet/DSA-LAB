@@ -122,11 +122,11 @@ private:
 
     void extractMaxUntilEmpty(node *root) {
         while(!isEmpty()) {
-            cout<<"extracting max priority: ";
+            cout<<"extracting  ";
             getRoot();
             extractMaxPriority();cout<<endl;
-            cout<<"level order: "<<endl;
-            levelorder();
+            cout<<"Tree: "<<endl;
+            levelorder();cout<<endl;
         }
     }
 
@@ -173,8 +173,9 @@ private:
     }
 };
 
+newBST bst;
+
 void test1() {
-    newBST bst;
     bst.insert(20, 92);
     bst.insert(50, 73);
     bst.insert(30, 48);
@@ -184,28 +185,12 @@ void test1() {
     bst.insert(80, 44);
 
     cout<<"Initial Tree:"<<endl;
-    cout<<"level order: "<<endl;
     bst.levelorder();cout<<endl;
 
-    bst.extractMaxPriority();
-    cout<<"After extract max priority:"<<endl;
-    cout<<"level order: "<<endl;
-    bst.levelorder();cout<<endl;
-
-    bst.getRoot();cout<<endl;
-
-    bst.extractMaxPriority();
-    cout<<"After extract max priority:"<<endl;
-    cout<<"level order: "<<endl;
-    bst.levelorder();cout<<endl;
-
-    bst.getRoot();cout<<endl;
-
-    // bst.extractMaxUntilEmpty();
+    bst.extractMaxUntilEmpty();
 }
 
 void test2() {
-    newBST bst;
     bst.insert(5, 3);
     bst.insert(1, 24);
     bst.insert(9, 10);
@@ -215,7 +200,21 @@ void test2() {
     bst.insert(2, 2);
 
     cout<<"Initial Tree:"<<endl;
-    cout<<"level order: "<<endl;
+    bst.levelorder();cout<<endl;
+
+    bst.extractMaxUntilEmpty();
+}
+
+void test3() {
+    bst.insert(50, 100);
+    bst.insert(30, 30);
+    bst.insert(70, 80);
+    bst.insert(20, 29);
+    bst.insert(31, 10);
+    bst.insert(60,  5);
+    bst.insert(90,  6);
+
+    cout<<"Initial Tree:"<<endl;
     bst.levelorder();cout<<endl;
 
     bst.extractMaxUntilEmpty();
@@ -225,12 +224,14 @@ void test2() {
 int main() {
     int t=1;
     while(t!=0) {
-        cout<<"Enter 1 to test1, 2 to test2, 0 to exit: ";
+        cout<<"Enter:\n1 to test1,\n2 to test2,\n3 to test3,\n0 to exit:\n";
         cin>>t;
         if(t==1) {
             test1();
         } else if(t==2) {
             test2();
+        } else if(t==3) {
+            test3();
         } else if(t==0) {
             cout<<"Exiting..."<<endl;
         } else {
