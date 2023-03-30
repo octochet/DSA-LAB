@@ -4,8 +4,10 @@
 
 using namespace std;
 
-//data structure for tree with node which has key, priority, left and right child.
-//new bst class, bst property for key, max heap property for priority
+/*
+data structure for tree with node which has key, priority, left and right child.
+new bst class, bst property for key, max heap property for priority
+*/
 
 class newBST
 {
@@ -41,7 +43,7 @@ public:
     }
 
 private:
-
+    //node structure
     struct node
     {
         int key;  
@@ -72,16 +74,16 @@ private:
 
     //insert function
     void insert(int key, int priority, node *&t) {
-        if (t == NULL)
-            t = new node(key, priority, NULL, NULL);
-        else if (key < t->key) {
-            insert(key, priority, t->left);
-            if (t->left->priority > t->priority)
+        if (t == NULL) //insert new node
+            t = new node(key, priority, NULL, NULL);  
+        else if (key < t->key) { //insert left
+            insert(key, priority, t->left); 
+            if (t->left->priority > t->priority)  //rotate if priority is greater
                 rotateWithLeftChild(t);
         }
-        else if (key > t->key) {
-            insert(key, priority, t->right);
-            if (t->right->priority > t->priority)
+        else if (key > t->key) {  //insert right
+            insert(key, priority, t->right); 
+            if (t->right->priority > t->priority) // rotate if priority is greater
                 rotateWithRightChild(t);
         }
         else
@@ -90,36 +92,38 @@ private:
 
     //extract max priority 
     void extractMaxPriority(node *&t) {
-        if (t == NULL)
+        if (t == NULL) //empty tree
             return;
-        else if (t->left == NULL && t->right == NULL) {
+        else if (t->left == NULL && t->right == NULL) { //leaf node
             delete t;
             t = NULL;
         }
-        else if (t->left == NULL) {
+        else if (t->left == NULL) { //only right child
             node *temp = t;
             t = t->right;
             delete temp;
         }
-        else if (t->right == NULL) {
+        else if (t->right == NULL) { //only left child
             node *temp = t;
             t = t->left;
             delete temp;
-        }
-        else if (t->left->priority > t->right->priority) {
+        } //both children cases below
+        else if (t->left->priority > t->right->priority) { //left child has greater priority
             rotateWithLeftChild(t);
             extractMaxPriority(t->right);
         }
-        else {
+        else { //right child has greater priority
             rotateWithRightChild(t);
             extractMaxPriority(t->left);
         }
     }
 
+    //check if tree is empty
     bool isEmpty() {
         return root == NULL;
     }
 
+    //extract max priority node (root) until tree is empty
     void extractMaxUntilEmpty(node *root) {
         while(!isEmpty()) {
             cout<<"extracting  ";
@@ -168,12 +172,14 @@ private:
         }
     }
 
+    //helper function to print a node(root)
     void getRoot(node *&t) {
         printf("root: (%d,%d)", t->key, t->priority);
     }
 };
 
 newBST bst;
+//bst.insert(key, priority);
 
 void test1() {
     bst.insert(20, 92);
@@ -224,8 +230,8 @@ void test3() {
 int main() {
     int t=1;
     while(t!=0) {
-        cout<<"Enter:\n1 to test1,\n2 to test2,\n3 to test3,\n0 to exit:\n";
-        cin>>t;
+        cout<<"Enter:\n1 to test1.\n2 to test2.\n3 to test3.\n0 to exit.\nYour choice:";
+        cin>>t;cout<<endl;
         if(t==1) {
             test1();
         } else if(t==2) {
