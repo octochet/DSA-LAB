@@ -1,0 +1,388 @@
+{20:43:54.440} INFO: [Game]   > System locale is 'En'
+{20:43:54.441} INFO: [Game]   > Speech locale is 'En'
+{20:43:54.446} INFO: [System] > Build version: 6.2023.0407.2045
+{20:43:54.446} INFO: [System] > [PID] 4956
+{20:43:54.488} INFO: [System] > [CPU] vendor: GenuineIntel, features: SSSE3 SSE4.1 SSE4.2 AVX AVX2 F16C FMA CX16 POPCNT LZCNT BMI1 BMI2 HTT, clock frequency: 2904.01MHz
+{20:43:54.488} INFO: [System] > [CPU] CPUs: 1, Cores: 8, HT: Yes, Logical processors: 16
+{20:43:54.501} INFO: [JobManager] > TM7108863f, dedicated worker threads: 1 + 7, num cpus: 16
+{20:43:54.503} INFO: [ODE]        > [ode::dInitialize] SSE path
+{20:43:54.690} INFO: [Renderer]   > [r_Initialize] Loaded from rd3d11_x64_rwdi.dll.
+{20:43:54.690} INFO: [Renderer]   > Enumerating D3D11 video adapters:
+{20:43:54.691} INFO: [Renderer]   > Adapter 1: Intel(R) UHD Graphics 630 128MB/8035MB/0MB
+{20:43:54.691} INFO: [Renderer]   |   Output 0: [0,0 - 1920,1080] \\.\DISPLAY1
+{20:43:54.691} INFO: [Renderer]   > Adapter 2: Microsoft Basic Render Driver 0MB/8035MB/0MB
+{20:43:54.723} INFO: [Renderer]   > Renderer started in DX11 mode.
+{20:43:54.758} INFO: [Renderer]   > DDraw reported 4,088M free texture memory.
+{20:43:54.850} INFO: [Renderer]   > Renderer: supported display modes:
+{20:43:54.850} INFO: [Renderer]   |  640x480, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  640x480, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  640x480, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  640x480, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  640x480, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  640x480, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x480, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x480, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x480, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x480, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x480, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x480, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x576, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x576, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x576, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x576, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x576, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  720x576, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  800x600, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  800x600, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  800x600, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  800x600, bpp:24, hz:60.32, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  800x600, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  800x600, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1024x768, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1024x768, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1024x768, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1024x768, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1024x768, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1024x768, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1152x864, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1152x864, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1152x864, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1152x864, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1152x864, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1152x864, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x600, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x600, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x600, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x600, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x600, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x600, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x720, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x720, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x720, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x720, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x720, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x720, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x768, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x768, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x768, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x768, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x768, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x768, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x800, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x800, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x800, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x800, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x800, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x800, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.850} INFO: [Renderer]   |  1280x960, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x960, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x960, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x960, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x960, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x960, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x1024, bpp:24, hz:60.02, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x1024, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x1024, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x1024, bpp:24, hz:59.96, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x1024, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1280x1024, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1360x768, bpp:24, hz:60.02, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1360x768, bpp:24, hz:59.96, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1360x768, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1360x768, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1360x768, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1360x768, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1366x768, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1366x768, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1366x768, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1366x768, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1366x768, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1366x768, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1400x1050, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1400x1050, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1400x1050, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1400x1050, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1400x1050, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1400x1050, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1440x900, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1440x900, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1440x900, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1440x900, bpp:24, hz:59.89, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1440x900, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1440x900, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1600x900, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1600x900, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1600x900, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1600x900, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1600x900, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1600x900, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1680x1050, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1680x1050, bpp:24, hz:60.01, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1680x1050, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1680x1050, bpp:24, hz:59.95, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1680x1050, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1680x1050, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1920x1080, bpp:24, hz:50.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1920x1080, bpp:24, hz:60.00, fmt: A8R8G8B8
+{20:43:54.851} INFO: [Renderer]   |  1920x1080, bpp:24, hz:59.94, fmt: A8R8G8B8
+{20:43:54.853} INFO: [INFO]       > Texture streaming lowest priority distance set to 100m
+{20:43:54.854} INFO: [Renderer]   > WindowOffset 0 0
+{20:43:55.302} DEBG: [DXGI]       > WM_SIZE 0, 1920x1061
+{20:43:55.302} INFO: [INFO]       > CGame::AppWindowInit: window client area: 0x0, 1920x1061
+{20:43:55.303} DEBG: [DXGI]       > [RChangeDeviceState] 1920x1080, fullscreen, 148500000/2970000 Hz
+{20:43:55.303} DEBG: [DXGI]       >                  was 0x0, fullscreen, 0/0 Hz
+{20:43:55.748} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING 1920x1080
+{20:43:55.748} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING overridden to 1920x1080
+{20:43:55.751} DEBG: [DXGI]       > WM_SIZE 0, 1920x1080
+{20:43:55.751} DEBG: [DXGI]       > [RWinOnWmSize] requested 1920x1080
+{20:43:55.751} DEBG: [DXGI]       > [RWinOnWmSize] swapchain was 1920x1080 fullscreen
+{20:43:55.752} DEBG: [DXGI]       > [RWinOnWmSize] swapchain changed to 1920x1080 fullscreen
+{20:43:55.793} INFO: [TexMgr]     > Max texture dimensions: 16384x16384x2048
+{20:43:55.799} INFO: [MatMgr]     > Number of supported techniques: 61
+{20:43:56.394} INFO: [MatMgr]     > Material pack 'optimized_dx11.mp' loaded.
+{20:43:56.421} ERRR: [Parser]     > Param 2 in function glod() is not a float
+{20:43:56.421} ERRR: [Parser]     > Param 2 in function glod() is not a float
+{20:43:56.529} INFO: [INFO]       > Texture streaming buffer set to 400MB
+{20:43:56.531} INFO: [Video]      > //Video settings:
+{20:43:56.531} INFO: [Video]      > Resolution(1920,1080)
+{20:43:56.531} INFO: [Video]      > Fullscreen()
+{20:43:56.531} INFO: [Video]      > Monitor(0)
+{20:43:56.531} INFO: [Video]      > TextureQuality("Medium")
+{20:43:56.531} INFO: [Video]      > VisRange(1.40, 1.40)
+{20:43:56.531} INFO: [Video]      > ShadowMapSize(1024)
+{20:43:56.531} INFO: [Video]      > SpotShadowMapSize(1024)
+{20:43:56.531} INFO: [Video]      > GammaFloat(1.00)
+{20:43:56.531} INFO: [Video]      > GrassQuality(2)
+{20:43:56.531} INFO: [Video]      > VSync(0)
+{20:43:56.531} INFO: [Video]      > AmbientOcclusion(0)
+{20:43:56.531} INFO: [Video]      > MotionBlur(0)
+{20:43:56.531} INFO: [Video]      > AntiAliasing(0)
+{20:43:56.531} INFO: [Video]      > DisableDWM(1)
+{20:43:56.531} INFO: [Video]      > 3dtvSettings(-0.150000, 0.000000)
+{20:43:56.531} INFO: [Video]      > Version(1)
+{20:43:56.531} INFO: [INFO]       > >>>>> Audio init
+{20:43:56.545} INFO: [INFO]       > FMOD::Driver: Headphones (Realtek(R) Audio)
+{20:43:56.552} INFO: [INFO]       > DriverCaps: FMOD_CAPS_OUTPUT_MULTICHANNEL
+{20:43:56.552} INFO: [INFO]       > DriverCaps: FMOD_CAPS_OUTPUT_FORMAT_PCM8
+{20:43:56.552} INFO: [INFO]       > DriverCaps: FMOD_CAPS_OUTPUT_FORMAT_PCM16
+{20:43:56.552} INFO: [INFO]       > DriverCaps: FMOD_CAPS_OUTPUT_FORMAT_PCM24
+{20:43:56.552} INFO: [INFO]       > DriverCaps: FMOD_CAPS_OUTPUT_FORMAT_PCM32
+{20:43:56.552} INFO: [INFO]       > DriverCaps: FMOD_CAPS_OUTPUT_FORMAT_PCMFLOAT
+{20:43:56.686} INFO: [INFO]       > FMOD is using (8) output type.
+{20:43:56.686} INFO: [INFO]       > FMOD Software Format Info:
+{20:43:56.686} INFO: [INFO]       | 	Out Sample Rate: <48000>
+{20:43:56.686} INFO: [INFO]       | 	Format: <5>
+{20:43:56.686} INFO: [INFO]       | 	Out Channels: <8>
+{20:43:56.686} INFO: [INFO]       | 	Max Input Channels: <8>
+{20:43:56.686} INFO: [INFO]       | 	Bits: <32>
+{20:43:56.686} INFO: [INFO]       > FMOD Mixer blocksize        = 21.33 ms
+{20:43:56.686} INFO: [INFO]       > FMOD Mixer blocks count     = 4
+{20:43:56.686} INFO: [INFO]       > FMOD Mixer Total buffer size = 85.33 ms
+{20:43:56.686} INFO: [INFO]       > FMOD Mixer Average Latency  = 53.33 ms
+{20:43:56.688} INFO: [Audio]      > //Audio settings:
+{20:43:56.688} INFO: [Audio]      > API("FMOD")
+{20:43:56.688} INFO: [Audio]      > MixFrequency(48000)
+{20:43:56.688} INFO: [Audio]      > Channels(40)
+{20:43:56.688} INFO: [Audio]      > Quality3D("high")
+{20:43:56.688} INFO: [Audio]      > MaxVolume(40)
+{20:43:56.688} INFO: [Audio]      > FXVolume(40)
+{20:43:56.688} INFO: [Audio]      > WaveVolume(40)
+{20:43:56.688} INFO: [Audio]      > SpeechVolume(40)
+{20:43:56.688} INFO: [Audio]      > MovieVolume(40)
+{20:43:56.688} INFO: [Audio]      > MovieVolumeSource(0)
+{20:43:56.688} INFO: [Audio]      > GlobalSettings("")
+{20:43:56.688} INFO: [Audio]      > ReverbChannels(1)
+{20:43:56.688} INFO: [Audio]      > MixerBlocksCount(0)
+{20:43:56.688} INFO: [Audio]      > 
+{20:43:56.690} INFO: [ResPack]    > Free resource loading disabled
+{20:44:01.347} INFO: [INFO]       > [Input] Keyboard 0 enumerated: intance_name = Keyboard, product_name = Keyboard, GUID = {6f1d2b61-d5a0-11cf-bfc7-444553540000}
+{20:44:01.396} INFO: [INFO]       > [CInput::SelectKeyboard] Keyboard 0 selected: Keyboard, Keyboard
+{20:44:01.500} INFO: [INFO]       > [SDL::InitSDL] InitSDL successed!
+{20:44:01.764} INFO: [Game]       > Game version: 1.49.0
+{20:44:02.470} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING 1936x1100
+{20:44:02.470} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING overridden to 1920x1080
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function Hidden() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function Hidden() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function Hidden() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.024} ERRR: [Parser]     > Param 0 in function ID() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.026} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.027} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.027} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.027} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.027} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.027} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.027} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.027} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:44:07.445} ERRR: [RestClient] > SendRequest failed. Unable to establish connection with server. Check you have a working network connection.
+{20:44:22.800} DEBG: [DXGI]       > [RChangeDeviceState] 1920x1080, fullscreen, 148500000/2970000 Hz
+{20:44:22.800} DEBG: [DXGI]       >                  was 1920x1080, fullscreen, 148500000/2970000 Hz
+{20:44:23.185} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING 1920x1080
+{20:44:23.186} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING overridden to 1920x1080
+{20:44:23.244} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING 1920x1080
+{20:44:23.244} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING overridden to 1920x1080
+{20:44:23.300} INFO: [Video]      > //Video settings:
+{20:44:23.300} INFO: [Video]      > Resolution(1920,1080)
+{20:44:23.300} INFO: [Video]      > Fullscreen()
+{20:44:23.300} INFO: [Video]      > Monitor(0)
+{20:44:23.300} INFO: [Video]      > TextureQuality("Medium")
+{20:44:23.300} INFO: [Video]      > VisRange(1.40, 1.40)
+{20:44:23.300} INFO: [Video]      > ShadowMapSize(1024)
+{20:44:23.300} INFO: [Video]      > SpotShadowMapSize(1024)
+{20:44:23.300} INFO: [Video]      > GammaFloat(1.00)
+{20:44:23.300} INFO: [Video]      > GrassQuality(2)
+{20:44:23.300} INFO: [Video]      > VSync(0)
+{20:44:23.300} INFO: [Video]      > AmbientOcclusion(0)
+{20:44:23.300} INFO: [Video]      > MotionBlur(0)
+{20:44:23.300} INFO: [Video]      > AntiAliasing(0)
+{20:44:23.300} INFO: [Video]      > DisableDWM(1)
+{20:44:23.300} INFO: [Video]      > 3dtvSettings(-0.150000, 0.000000)
+{20:44:23.300} INFO: [Video]      > Version(1)
+{20:45:50.386} ERRR: [Lobby]      > [CLobbyProfile::SignIn] Unsupported!
+{20:46:00.066} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.067} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:00.076} ERRR: [RestClient] > SendRequest failed. Unable to establish connection with server. Check you have a working network connection.
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.237} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:46:23.327} ERRR: [RestClient] > SendRequest failed. Unable to establish connection with server. Check you have a working network connection.
+{20:47:44.966} DEBG: [DXGI]       > [RChangeDeviceState] 1920x1080, fullscreen, 148500000/2970000 Hz
+{20:47:44.966} DEBG: [DXGI]       >                  was 1920x1080, fullscreen, 148500000/2970000 Hz
+{20:47:45.042} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING 1920x1080
+{20:47:45.042} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING overridden to 1920x1080
+{20:47:45.182} INFO: [Video]      > //Video settings:
+{20:47:45.182} INFO: [Video]      > Resolution(1920,1080)
+{20:47:45.182} INFO: [Video]      > Fullscreen()
+{20:47:45.182} INFO: [Video]      > MaxFPS(30)
+{20:47:45.182} INFO: [Video]      > Monitor(0)
+{20:47:45.182} INFO: [Video]      > TextureQuality("Medium")
+{20:47:45.182} INFO: [Video]      > VisRange(2.60, 2.60)
+{20:47:45.182} INFO: [Video]      > ShadowMapSize(512)
+{20:47:45.182} INFO: [Video]      > SpotShadowMapSize(512)
+{20:47:45.182} INFO: [Video]      > GammaFloat(1.00)
+{20:47:45.182} INFO: [Video]      > GrassQuality(2)
+{20:47:45.182} INFO: [Video]      > VSync(0)
+{20:47:45.182} INFO: [Video]      > ExtraGameFov(2.00)
+{20:47:45.182} INFO: [Video]      > AmbientOcclusion(0)
+{20:47:45.182} INFO: [Video]      > MotionBlur(0)
+{20:47:45.182} INFO: [Video]      > AntiAliasing(0)
+{20:47:45.182} INFO: [Video]      > DisableDWM(1)
+{20:47:45.182} INFO: [Video]      > 3dtvSettings(-0.150000, 0.000000)
+{20:47:45.182} INFO: [Video]      > Version(1)
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.308} ERRR: [Parser]     > Param 3 in function DLC() is not a string
+{20:47:57.411} ERRR: [RestClient] > SendRequest failed. Unable to establish connection with server. Check you have a working network connection.
+{20:50:57.286} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING 1920x1080
+{20:50:57.287} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING overridden to 1920x1080
+{20:51:12.153} DEBG: [DXGI]       > [RChangeDeviceState] 1920x1080, fullscreen, 148500000/2970000 Hz
+{20:51:12.153} DEBG: [DXGI]       >                  was 1920x1080, fullscreen, 148500000/2970000 Hz
+{20:51:12.589} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING 1920x1080
+{20:51:12.589} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING overridden to 1920x1080
+{20:51:12.641} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING 1920x1080
+{20:51:12.641} DEBG: [DXGI]       > WM_WINDOWPOSCHANGING overridden to 1920x1080
+{20:51:12.704} INFO: [Video]      > //Video settings:
+{20:51:12.704} INFO: [Video]      > Resolution(1920,1080)
+{20:51:12.704} INFO: [Video]      > Fullscreen()
+{20:51:12.704} INFO: [Video]      > MaxFPS(30)
+{20:51:12.704} INFO: [Video]      > Monitor(0)
+{20:51:12.704} INFO: [Video]      > TextureQuality("Medium")
+{20:51:12.704} INFO: [Video]      > VisRange(2.60, 2.60)
+{20:51:12.704} INFO: [Video]      > ShadowMapSize(512)
+{20:51:12.704} INFO: [Video]      > SpotShadowMapSize(512)
+{20:51:12.704} INFO: [Video]      > GammaFloat(1.00)
+{20:51:12.704} INFO: [Video]      > GrassQuality(2)
+{20:51:12.704} INFO: [Video]      > VSync(0)
+{20:51:12.704} INFO: [Video]      > ExtraGameFov(2.00)
+{20:51:12.704} INFO: [Video]      > AmbientOcclusion(0)
+{20:51:12.704} INFO: [Video]      > MotionBlur(0)
+{20:51:12.704} INFO: [Video]      > AntiAliasing(0)
+{20:51:12.704} INFO: [Video]      > DisableDWM(1)
+{20:51:12.704} INFO: [Video]      > 3dtvSettings(-0.150000, 0.000000)
+{20:51:12.704} INFO: [Video]      > Version(1)
+{20:51:21.952} INFO: [INFO]       > ---------------------------------------------------------
+{20:51:21.953} INFO: [INFO]       > Time of playing game: 447.485901s
+{20:51:21.953} INFO: [INFO]       > Updated frames: 14770 Rendered frames: 11607
+{20:51:21.953} INFO: [INFO]       > Average FPS: 25.938248
+{20:51:21.953} INFO: [INFO]       > ---------------------------------------------------------
+{20:51:22.030} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 1 [file_name=<menu_buttons.dds> engine_id=<btn_cornerLT> script_id=<11> m_rRect=<0.000000,0.000000,58.000000,64.000000> m_iRefCount=1]
+{20:51:22.030} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 1 [file_name=<menu_frames.dds> engine_id=<btn_cornerLT_sel> script_id=<11> m_rRect=<0.000000,0.000000,64.000000,64.000000> m_iRefCount=1]
+{20:51:22.030} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 1 [file_name=<menu_buttons.dds> engine_id=<btn_cornerRT> script_id=<11> m_rRect=<199.000000,0.000000,256.000000,64.000000> m_iRefCount=1]
+{20:51:22.030} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 1 [file_name=<menu_frames.dds> engine_id=<btn_cornerRT_sel> script_id=<11> m_rRect=<192.000000,0.000000,256.000000,64.000000> m_iRefCount=1]
+{20:51:22.030} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 1 [file_name=<menu_buttons.dds> engine_id=<btn_top> script_id=<11> m_rRect=<58.000000,0.000000,198.000000,64.000000> m_iRefCount=1]
+{20:51:22.030} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 1 [file_name=<menu_frames.dds> engine_id=<btn_top_sel> script_id=<11> m_rRect=<64.000000,0.000000,191.000000,64.000000> m_iRefCount=1]
+{20:51:22.125} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 2 [file_name=<menu_buttons.dds> engine_id=<btn_cornerLT> script_id=<3> m_rRect=<0.000000,0.000000,58.000000,64.000000> m_iRefCount=2]
+{20:51:22.125} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 2 [file_name=<menu_frames.dds> engine_id=<btn_cornerLT_sel> script_id=<3> m_rRect=<0.000000,0.000000,64.000000,64.000000> m_iRefCount=2]
+{20:51:22.125} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 2 [file_name=<menu_buttons.dds> engine_id=<btn_cornerRT> script_id=<3> m_rRect=<199.000000,0.000000,256.000000,64.000000> m_iRefCount=2]
+{20:51:22.125} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 2 [file_name=<menu_frames.dds> engine_id=<btn_cornerRT_sel> script_id=<3> m_rRect=<192.000000,0.000000,256.000000,64.000000> m_iRefCount=2]
+{20:51:22.125} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 2 [file_name=<menu_buttons.dds> engine_id=<btn_top> script_id=<3> m_rRect=<58.000000,0.000000,198.000000,64.000000> m_iRefCount=2]
+{20:51:22.125} ERRR: [ERRR]       > [CUITextureManager::Destroy] referenced texture definition 2 [file_name=<menu_frames.dds> engine_id=<btn_top_sel> script_id=<3> m_rRect=<64.000000,0.000000,191.000000,64.000000> m_iRefCount=2]
+{20:51:23.610} INFO: [Renderer]   > [r_Shutdown] Dll released
