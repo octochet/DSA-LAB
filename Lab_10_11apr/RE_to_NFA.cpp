@@ -32,3 +32,7 @@ solution:
 4. add a transition from the current state to the final state on the empty string
 5. return N
 */
+
+int main() {
+    return 0;
+}
