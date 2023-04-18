@@ -1,5 +1,5 @@
 DSA LAB WORK:
-LAB 0: Generalized stack❌;                                                                       
+LAB 00: Generalized stack❌;                                                                       
 LAB 01: method of 4 russians✅; Knight's tour✅; Knight's tour using stack✅;
 LAB 02: weighted median✅;
 LAB 03: Skip list✅;
