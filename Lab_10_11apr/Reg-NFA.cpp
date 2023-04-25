@@ -1,359 +1,291 @@
-#include<iostream>
-#include<stack>
-#include<string>
-#include <algorithm> 
-#include<vector>
+#include "regex_to_nfa.h"
+#include <iostream>
+#include <stack>
+#include <string>
+#include <algorithm>
 
 using namespace std;
 
-class node{
-public:
-	char input;
-	int to;
-	node *next;
-};
-
-
-
-int prec(char c){
-	if(c=='*'){
-		return 3;
-	}else if(c=='.'){
-		return 2;
-	}else if(c=='+'){
-		return 1;
-	}else{
-		return -1;
-	}
+NFAGraphState::NFAGraphState()
+{
+    this->edgeTransitions["@"].insert(this);
+    this->isAccepting = false;
 }
 
+NFAGraphState::NFAGraphState(bool isAccepting)
+{
+    this->edgeTransitions["@"].insert(this);
+    this->isAccepting = isAccepting;
+}
 
+unordered_set<NFAGraphState *> NFAGraph::transitionFunction(NFAGraphState *currentState, std::string input)
+{
+    return currentState->edgeTransitions[input];
+}
 
-string post(string s) 
-{ 
-    stack<char> st; 
-    st.push('N'); 
-    int l = s.length(); 
-    string ns; 
-    for(int i = 0; i < l; i++) 
+unordered_set<NFAGraphState *> NFAGraph::epsilonClosure(NFAGraphState *currentState)
+{
+    unordered_set<NFAGraphState *> closure = {currentState};
+    stack<NFAGraphState *> stack;
+    stack.push(currentState);
+    while (!stack.empty())
     {
-        if((s[i] >= 'a' && s[i] <= 'z')||(s[i] >= 'A' && s[i] <= 'Z')){
-	        ns+=s[i]; 
-        }
-
-        else if(s[i] == '('){          
-	        st.push('('); 
-        }
-        else if(s[i] == ')') 
-        { 
-            while(st.top() != 'N' && st.top() != '(') 
-            { 
-                char c = st.top(); 
-                st.pop(); 
-               ns += c; 
-            } 
-            if(st.top() == '(') 
-            { 
-                char c = st.top(); 
-                st.pop(); 
-            } 
-        } 
-        else{ 
-            while(st.top() != 'N' && prec(s[i]) <= prec(st.top())) 
-            { 
-                char c = st.top(); 
-                st.pop(); 
-                ns += c; 
-            } 
-            st.push(s[i]); 
-        } 
-  
-    } 
-    while(st.top() != 'N') 
-    { 
-        char c = st.top(); 
-        st.pop(); 
-        ns += c; 
-    } 
-return ns;
-}
-
-void printnode(vector<node*> v){
-	cout<<"___________________________________________"<<endl;
-	cout<<"| from state\t| input\t| tostates"<<endl;
-	for(int i=0;i<v.size();i++){
-		cout<<"| "<<i<<"          \t|";
-		node* head = v[i];
- 		cout<<head->input;
- 		bool first = true;
-		while(head!=NULL){
-			if (first)
-			{
-				cout<<"     \t|";
-				first = false;
-			}else{
-				cout<<"     \t";
-			}
-			cout<<head->to;
-			head = head->next;
-		}
-		cout<<endl;
-		// cout<<"\t\t\t\t\t\t|"<<endl;
-	}
-	cout<<"___________________________________________"<<endl;
-}
-
-
-
-
-node* makenode(char in){
-	node* a = new node;
-	a->input = in;
-	a->to = -1;
-	a->next = NULL;
-	return a;
-}
-
-node* copynode(node* a){
-	node* b = new node;
-	b->input = -1;
-	b->to = -1;
-	b->next =NULL;
-	return b;
-}
-
-
-void andd(vector<node*> &v,vector<vector<int> > &st){
-	int x,y;
-	int first,last1;
-	y = st[st.size()-1][0];
-	x = st[st.size()-2][1];
-	first = st[st.size()-2][0];
-	last1 = st[st.size()-1][1];
-
-	st.pop_back();
-	st.pop_back();
-
-	vector<int> ptemp;
-	ptemp.push_back(first);
-	ptemp.push_back(last1);
-	st.push_back(ptemp);
-
-	node* last = v[y];
-	node * lnode= v[x];
-	node* temp = copynode(last);
-	// temp->to = -1;
-	while(lnode->next!=NULL){
-		lnode = lnode->next;
-	}
-	lnode->next = temp;
-	lnode->to = y;
-
-}
-
-void orr(vector<node*> &v,vector<vector<int> > &st){
-	int x,y,x1,y1;
-	x = st[st.size()-2][0];
-	y = st[st.size()-1][0];
-	x1 = st[st.size()-2][1];
-	y1 = st[st.size()-1][1];
-	node* start = makenode('e');
-	node* end = makenode('e');
-	v.push_back(start);
-	int firstnode = v.size() -1;
-	v.push_back(end);
-	int endnode = v.size() -1;
-
-	st.pop_back();
-	st.pop_back();
-
-	vector<int> ptemp;
-	ptemp.push_back(firstnode);
-	ptemp.push_back(endnode);
-	st.push_back(ptemp);
-
-	for(int i=0;i<v.size()-2;i++){
-		node* h=v[i];
-		while(h->next!=NULL){
-			if(h->to==x || h->to == y){
-				h->to = firstnode;
-			}
-			h = h->next;
-		}
-	}
-
-
-	node* temp = copynode(v[x]);
-	node* temp1 = copynode(v[y]);
-	node* t = v[firstnode];
-	while(t->next!=NULL){
-		t = t->next;
-	}
-	t->to = x;
-	t->next  = temp;
-	t->next->to = y;
-	t->next->next = temp1;
-
-	node* adlink = v[x1];
-	while(adlink->next!=NULL){
-		adlink = adlink->next;
-	}
-
-	adlink->to= endnode;
-	adlink->next = copynode(end);
-
-	node* adlink1 = v[y1];
-	while(adlink1->next!=NULL){
-		adlink1 = adlink1->next;
-	}
-	adlink1->to = endnode;
-	adlink1->next = copynode(end);
-
-}
-
-
-void closure(vector<node*> &v, vector<vector<int> > &st){
-	int x,x1;
-	x = st[st.size()-1][0];
-	x1 = st[st.size()-1][1];
-	node* s = makenode('e');
-	// node* e = makenode('e');
-	v.push_back(s);
-	int firstnode = v.size() -1;
-	// v.push_back(e);
-	// int endnode = v.size() -1;
-	st.pop_back();
-	vector<int> ptemp;
-	ptemp.push_back(x);
-	ptemp.push_back(firstnode);
-	st.push_back(ptemp);
-
-	for(int i=0;i<v.size()-2;i++){
-		node* h=v[i];
-		while(h->next!=NULL){
-			if(h->to==x){
-				h->to = firstnode;
-			}
-			h = h->next;
-		}
-	}
-
-	// node* strt = v[firstnode];
-	// while(strt->next!=NULL){
-	// 	strt = strt->next;
-	// }
-	// strt->to = x;
-	// strt->next = copynode(v[x]);
-	// strt->next->to = endnode;
-	// strt->next->next = copynode(v[endnode]);
-
-
-	node* t = v[x1];
-	while(t->next!=NULL){
-		t = t->next;
-	}
-	t->to = x;
-	t->next = copynode(t);
-	t->next->to = firstnode;
-	t->next->next = copynode(s);
-}
-
-bool accepts(vector<node*> &v, int start, int end, string input) {
-    vector<int> current_states;
-    current_states.push_back(start);
-    
-    // Follow epsilon transitions from start state
-    node* h = v[start];
-    while (h != NULL) {
-        if (h->input == 'e') {
-            current_states.push_back(h->to);
-        }
-        h = h->next;
-    }
-    
-    // Process input symbols one by one
-    for (char c : input) {
-        vector<int> next_states;
-        for (int state : current_states) {
-            // Follow transitions on current input symbol
-            node* h = v[state];
-            while (h != NULL) {
-                if (h->input == c) {
-                    next_states.push_back(h->to);
-                }
-                h = h->next;
+        NFAGraphState *state = stack.top();
+        stack.pop();
+        for (NFAGraphState *state2 : state->edgeTransitions["@"])
+        {
+            if (closure.find(state2) == closure.end())
+            {
+                closure.insert(state2);
+                stack.push(state2);
             }
         }
-        // Follow epsilon transitions from new states
-        vector<int> new_states = next_states;
-        for (int state : next_states) {
-            h = v[state];
-            while (h != NULL) {
-                if (h->input == 'e') {
-                    new_states.push_back(h->to);
-                }
-                h = h->next;
+    }
+    return closure;
+}
+
+bool NFAGraph::isValidString(std::string input)
+{
+    unordered_set<NFAGraphState *> currentStates = epsilonClosure(startState);
+    for (int i = 0; i < input.length(); i++)
+    {
+        unordered_set<NFAGraphState *> nextStates = {};
+        for (NFAGraphState *state : currentStates)
+        {
+            unordered_set<NFAGraphState *> temp = transitionFunction(state, input.substr(i, 1));
+            for (NFAGraphState *state2 : temp)
+            {
+                unordered_set<NFAGraphState *> temp2 = epsilonClosure(state2);
+                nextStates.insert(temp2.begin(), temp2.end());
             }
         }
-        current_states = new_states;
+        currentStates = nextStates;
     }
-    
-    // Check if any current state is an accepting state
-    for (int state : current_states) {
-        if (state == end) {
+    for (NFAGraphState *state : currentStates)
+    {
+        if (state->isAccepting)
+        {
             return true;
         }
     }
     return false;
 }
 
-int main(){
-	string in;
-	cout<<"Enter a regular expression\n";
-	cin>>in;
-	string o;
-	vector<node*> v;
-	o = post(in);
-	cout<<"\npostfix expression is "<< o<<endl;
-	vector<vector<int>> st;
-	int firstnode = 0;
-	for(int l =0 ;l<o.length();l++){
-		if(o[l] !='+' && o[l]!='*' && o[l]!='.'){
-			node* temp = makenode(o[l]);
-			v.push_back(temp);
-			vector<int> ptemp;
-			ptemp.push_back(v.size()-1);
-			ptemp.push_back(v.size()-1);
-			st.push_back(ptemp);
-		}
-		else if(o[l]=='.'){
-			andd(v,st);
-		}
-		else if(o[l]=='+'){
-			orr(v,st);
-		}
-		else if(o[l]=='*'){
-			closure(v,st);
-		}
+NFAGraph *regToNFAConvertor::getNFAforAlphabet(string alphabet)
+{
+    NFAGraph *nfa = new NFAGraph();
+    nfa->alphabet.insert(alphabet);
+    NFAGraphState *startState = new NFAGraphState();
+    NFAGraphState *acceptingState = new NFAGraphState(true);
+    startState->edgeTransitions[alphabet].insert(acceptingState);
+    nfa->States.insert(startState);
+    nfa->States.insert(acceptingState);
+    nfa->startState = startState;
+    nfa->acceptingStates.insert(acceptingState);
+    return nfa;
+}
 
+NFAGraph *regToNFAConvertor::getConcat(NFAGraph *nfa1, NFAGraph *nfa2)
+{
+    NFAGraph *nfa = new NFAGraph();
+    nfa->alphabet = nfa1->alphabet;
+    nfa->alphabet.insert(nfa2->alphabet.begin(), nfa2->alphabet.end());
+    nfa->States = nfa1->States;
+    nfa->States.insert(nfa2->States.begin(), nfa2->States.end());
+    nfa->startState = nfa1->startState;
+    nfa->acceptingStates = nfa2->acceptingStates;
+    for (NFAGraphState *state : nfa1->acceptingStates)
+    {
+        state->isAccepting = false;
+        state->edgeTransitions["@"].insert(nfa2->startState);
+    }
+    delete nfa1;
+    delete nfa2;
+    return nfa;
+}
 
-	}
-	cout<<"\ntrainsition table for given regular expression is - \n";
-	printnode(v);
-	cout<<endl;
-	cout<<"starting node is ";
-	cout<<st[st.size()-1][0]<<endl;
-	cout<<"ending node is ";
-	cout<<st[st.size()-1][1]<<endl;
+NFAGraph *regToNFAConvertor::getUnion(NFAGraph *nfa1, NFAGraph *nfa2)
+{
+    NFAGraph *nfa = new NFAGraph();
+    nfa->alphabet = nfa1->alphabet;
+    nfa->alphabet.insert(nfa2->alphabet.begin(), nfa2->alphabet.end());
+    nfa->States = nfa1->States;
+    nfa->States.insert(nfa2->States.begin(), nfa2->States.end());
 
-	string input;
-	cout<<"Enter a string to check if it is accepted by the given regular expression\n";
-	cin>>input;
-	if(accepts(v,st[st.size()-1][0],st[st.size()-1][1],input)){
-		cout<<"accepted\n";
-	}
-	else{
-		cout<<"not accepted\n";
-	}
-	return 0;
+    nfa->startState = new NFAGraphState();
+    nfa->States.insert(nfa->startState);
+    nfa->startState->edgeTransitions["@"].insert(nfa1->startState);
+    nfa->startState->edgeTransitions["@"].insert(nfa2->startState);
+
+    NFAGraphState *newState = new NFAGraphState(true);
+    nfa->States.insert(newState);
+    nfa->acceptingStates.insert(newState);
+    for (NFAGraphState *state : nfa1->acceptingStates)
+    {
+        state->edgeTransitions["@"].insert(newState);
+    }
+    for (NFAGraphState *state : nfa2->acceptingStates)
+    {
+        state->edgeTransitions["@"].insert(newState);
+    }
+    delete nfa1;
+    delete nfa2;
+    return nfa;
+}
+
+NFAGraph *regToNFAConvertor::getStar(NFAGraph *nfa)
+{
+    NFAGraph *newNFA = new NFAGraph();
+    newNFA->alphabet = nfa->alphabet;
+    newNFA->States = nfa->States;
+    newNFA->startState = new NFAGraphState(true);
+    newNFA->States.insert(newNFA->startState);
+    newNFA->acceptingStates.insert(newNFA->startState);
+    newNFA->startState->edgeTransitions["@"].insert(nfa->startState);
+    NFAGraphState *newState = new NFAGraphState(true);
+    newNFA->States.insert(newState);
+    newNFA->acceptingStates.insert(newState);
+    for (NFAGraphState *state : nfa->acceptingStates)
+    {
+        state->edgeTransitions["@"].insert(nfa->startState);
+        state->edgeTransitions["@"].insert(newState);
+    }
+    delete nfa;
+    return newNFA;
+}
+
+NFAGraph *regToNFAConvertor::regToNFA(string reg)
+{
+    string prefix = regex_to_prefix(reg);
+    stack<NFAGraph *> nfa_stack;
+    for (int i = prefix.length(); i >= 0; i--)
+    {
+        if (prefix[i] == '*')
+        {
+            NFAGraph *nfa = nfa_stack.top();
+            nfa_stack.pop();
+            nfa_stack.push(getStar(nfa));
+        }
+        else if (prefix[i] == '.')
+        {
+            NFAGraph *nfa1 = nfa_stack.top();
+            nfa_stack.pop();
+            NFAGraph *nfa2 = nfa_stack.top();
+            nfa_stack.pop();
+            nfa_stack.push(getConcat(nfa1, nfa2));
+        }
+        else if (prefix[i] == '+')
+        {
+            NFAGraph *nfa1 = nfa_stack.top();
+            nfa_stack.pop();
+            NFAGraph *nfa2 = nfa_stack.top();
+            nfa_stack.pop();
+            nfa_stack.push(getUnion(nfa1, nfa2));
+        }
+        else
+        {
+            nfa_stack.push(getNFAforAlphabet(string(1, prefix[i])));
+        }
+    }
+    mainNFA = nfa_stack.top();
+    return nfa_stack.top();
+}
+
+int regToNFAConvertor::get_precedence(char c)
+{
+    if (c == '*')
+        return 3;
+    else if (c == '.')
+        return 2;
+    else if (c == '+')
+        return 1;
+    else
+        return 0;
+}
+
+bool regToNFAConvertor::is_operator(char c)
+{
+    if (c == '*' || c == '.' || c == '+' || c == '(' || c == ')')
+        return true;
+    return false;
+}
+
+string regToNFAConvertor::regex_to_prefix(string infix)
+{
+    infix = '(' + infix + ')';
+
+    std::reverse(infix.begin(), infix.end());
+
+    int l = infix.size();
+    stack<char> char_stack;
+    string output;
+
+    for (int i = 0; i < l; i++)
+    {
+
+        // If the scanned character is an
+        // operand, add it to output.
+        if (!is_operator(infix[i]))
+            output += infix[i];
+
+        // If the scanned character is an
+        // ‘(‘, push it to the stack.
+        else if (infix[i] == ')')
+            char_stack.push(')');
+
+        // If the scanned character is an
+        // ‘)’, pop and output from the stack
+        // until an ‘(‘ is encountered.
+        else if (infix[i] == '(')
+        {
+            while (char_stack.top() != ')')
+            {
+                output += char_stack.top();
+                char_stack.pop();
+            }
+
+            // Remove '(' from the stack
+            char_stack.pop();
+        }
+
+        // Operator found
+        else
+        {
+            if (is_operator(char_stack.top()))
+            {
+                while (
+                    get_precedence(infix[i]) < get_precedence(char_stack.top()))
+                {
+                    output += char_stack.top();
+                    char_stack.pop();
+                }
+
+                // Push current Operator on stack
+                char_stack.push(infix[i]);
+            }
+        }
+    }
+    while (!char_stack.empty())
+    {
+        output += char_stack.top();
+        char_stack.pop();
+    }
+    std::reverse(output.begin(), output.end());
+    return output;
+}
+
+int main()
+{
+
+    regToNFAConvertor *regToNFA = new regToNFAConvertor();
+    string reg;
+    cin>>reg;
+    NFAGraph *nfa = regToNFA->regToNFA(reg);
+    cout << nfa->isValidString("abd") << endl;
+    
+    string check;
+    while(cin>>check)
+    {
+        cout<<nfa->isValidString(check)<<endl;
+    }
 }
