@@ -3,7 +3,7 @@ LAB 00: Generalized stack❌;
 LAB 01: method of 4 russians✅; Knight's tour✅; Knight's tour using stack✅;
 LAB 02: weighted median✅;
 LAB 03: Skip list✅;
-LAB 04: α-quantile (using select and quickselect)❌; stable 3 way quicksort✅; bottom up merge sort✅;
+LAB 04: α-quantile (using select and quickselect)✅; stable 3 way quicksort✅; bottom up merge sort✅;
 LAB 05: Huffman encoding✅; Huffman decoding❌;
 LAB 06: BST Implementation✅;
 LAB 07: Intersection points✅;
