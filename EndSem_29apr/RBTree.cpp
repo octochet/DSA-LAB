@@ -47,10 +47,144 @@ Node* RBTree::insertBST(Node *&root, Node *&ptr) {
     return root;
 }
 
+void RBTree::rotateLeftx(Node*& root, Node* node) {
+    Node* right = node->right;
+    node->right = right->left;
+    if (node->right != nullptr) {
+        node->right->parent = node;
+    }
+    right->parent = node->parent;
+    if (node->parent == nullptr) {
+        root = right;
+    } else if (node == node->parent->left) {
+        node->parent->left = right;
+    } else {
+        node->parent->right = right;
+    }
+    right->left = node;
+    node->parent = right;
+}
+
+void RBTree::rotateRightx(Node*& root, Node* node) {
+    Node* left = node->left;
+    node->left = left->right;
+    if (node->left != nullptr) {
+        node->left->parent = node;
+    }
+    left->parent = node->parent;
+    if (node->parent == nullptr) {
+        root = left;
+    } else if (node == node->parent->left) {
+        node->parent->left = left;
+    } else {
+        node->parent->right = left;
+    }
+    left->right = node;
+    node->parent = left;
+}
+
+void RBTree::insert(Node*& root, Node* node) {
+    Node* y = nullptr;
+    Node* x = root;
+    while (x != nullptr) {
+        y = x;
+        if (node->data < x->data) {
+            x = x->left;
+        } else {
+            x = x->right;
+        }
+    }
+    node->parent = y;
+    if (y == nullptr) {
+        root = node;
+    } else if (node->data < y->data) {
+        y->left = node;
+    } else {
+        y->right = node;
+    }
+    node->left = nullptr;
+    node->right = nullptr;
+    node->color = RED;
+    fixInsert(root, node);
+}
+
+void RBTree::fixInsert(Node*& root, Node* node) {
+    while (node->parent != nullptr && node->parent->color == RED) {
+        if (node->parent == node->parent->parent->left) {
+            Node* y = node->parent->parent->right;
+            if (y != nullptr && y->color == RED) {
+                node->parent->color = BLACK;
+                y->color = BLACK;
+                node->parent->parent->color = RED;
+                node = node->parent->parent;
+            } else {
+                if (node == node->parent->right) {
+                    node = node->parent;
+                    rotateLeftx(root, node);
+                }
+                node->parent->color = BLACK;
+                node->parent->parent->color = RED;
+                rotateRightx(root, node->parent->parent);
+            }
+        } else {
+            Node* y = node->parent->parent->left;
+            if (y != nullptr && y->color == RED) {
+                node->parent->color = BLACK;
+                y->color = BLACK;
+                node->parent->parent->color = RED;
+                node = node->parent->parent;
+            } else {
+                if (node == node->parent->left) {
+                    node = node->parent;
+                    rotateRightx(root, node);
+                }
+                node->parent->color = BLACK;
+                node->parent->parent->color = RED;
+                rotateLeftx(root, node->parent->parent);
+            }
+        }
+    }
+    root->color = BLACK;
+    updateCF(node);
+}
+
+//fixes the cummulative frequencies from the node to the root
+void RBTree::updateCF(Node* node) {
+    node->cf = node->weight;
+    Node* current = node;
+    while (current->parent != nullptr) {
+        if (current == current->parent->right) {
+            current = current->parent;
+            node->cf += current->weight;
+            if (current->left != nullptr) {
+                node->cf += current->left->cf;
+            }
+        } else {
+            current = current->parent;
+        }
+    }
+    fixSuccessorCF(node->right);
+}
+
+//fix all successor cummulative frequencies
+void RBTree::fixSuccessorCF(Node* node) {
+    if (node == nullptr) {
+        return;
+    }
+    node->cf = node->weight;
+    if (node->left != nullptr) {
+        node->cf += node->left->cf;
+    }
+    if (node->right != nullptr) {
+        node->cf += node->right->cf;
+    }
+    fixSuccessorCF(node->left);
+    fixSuccessorCF(node->right);
+}
+
 void RBTree::insertValue(int n, double w) {
     Node *node = new Node(n, w);
     root = insertBST(root, node);
-    //insertFixup(root,node);
     fixInsertRBTree(node);
     precomputeCF();
 }
@@ -297,29 +431,61 @@ void RBTree::levelOrder() {
 }
 
 void RBTree::alphaQuantile(double alpha) {
-    alphaQuantileBST(root, alpha);
+    Node* prev = root;
+    alphaQuantileBST(root, alpha, prev);
     //cout << "-------" << endl;
 }
 
 //do bst search
-void RBTree::alphaQuantileBST(Node *&ptr, double alpha) {
+void RBTree::alphaQuantileBST(Node *&ptr, double alpha, Node* &prev) {
     if(ptr==nullptr) {
         return;
     }
-    else if(alpha < ptr->cf){
-        if(ptr->left == nullptr) {
-            printf("The %f quantile is (val:%d,weight:%f)\n",alpha, ptr->data, ptr->weight);
+    else if(alpha < ptr->cf) {
+        if(ptr->left==nullptr || prev->left==nullptr) {
+            printf("The %f quantile is (val:%d,weight:%f,cf:%f)\n",alpha, prev->data, prev->weight, prev->cf);
+            return;
         }
-        alphaQuantileBST(ptr->left, alpha);
+        alphaQuantileBST(ptr->left, alpha, prev);
     }
     else if(alpha > ptr->cf) {
-        if(ptr->right == nullptr) {
-            printf("The %f quantile is (val:%d,weight:%f)\n",alpha, ptr->data, ptr->weight);
+        prev = ptr;
+        if(ptr->right==nullptr || prev->right==nullptr) {
+            printf("The %f quantile is (val:%d,weight:%f,cf:%f)\n",alpha, prev->data, prev->weight, prev->cf);
+            return;
         }
-        alphaQuantileBST(ptr->right, alpha);
+        alphaQuantileBST(ptr->right, alpha, prev);
     }
     else if(alpha == ptr->cf) {
-        printf("The %f quantile is (val:%d,weight:%f)\n",alpha, ptr->data, ptr->weight);
+        printf("The %f quantile is (val:%d,weight:%f,cf:%f)\n",alpha, ptr->data, ptr->weight, ptr->cf);
+        return;
+    }
+}
+
+void RBTree::predecessor(int data) {
+    Node *predecessor = predecessorBST(root, data);
+    if (predecessor == nullptr) {
+        printf("Predecessor of %d doesn't exist\n", data);
+        return;
+    }
+    printf("(val:%d, weight:%f)\n",predecessor->data, predecessor->weight);
+}
+
+Node* RBTree::predecessorBST(Node *&ptr, int data) {
+    if (ptr == nullptr)
+        return ptr;
+
+    if (ptr->data == data) {
+        if (ptr->left != nullptr) {
+            Node *temp = ptr->left;
+            while (temp->right != nullptr)
+                temp = temp->right;
+            return temp;
+        }
+    } else if (data < ptr->data) {
+        return predecessorBST(ptr->left, data);
+    } else {
+        return predecessorBST(ptr->right, data);
     }
 }
 

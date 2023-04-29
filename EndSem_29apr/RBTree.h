@@ -37,9 +37,16 @@ class RBTree
         Node* insertBST(Node *&, Node *&);
         Node* deleteBST(Node *&, int);
         int getBlackHeight(Node *);
-        void alphaQuantileBST(Node *&, double);
+        void alphaQuantileBST(Node *&, double, Node*&);
         void findCF(Node *, float&);
-        void insertFixup(Node *&, Node *);
+        void insert(Node *&, Node *);
+        void fixInsert(Node *&, Node *);
+        void updateCF(Node *);
+        void rotateLeftx(Node *&, Node*);
+        void rotateRightx(Node *&, Node*);
+        void fixSuccessorCF(Node *);
+        void predecessor(int);
+        Node* predecessorBST(Node *&, int);
     public:
         RBTree();
         void insertValue(int, double);
