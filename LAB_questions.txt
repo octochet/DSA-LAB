@@ -7,6 +7,6 @@ LAB 04: α-quantile (using select and quickselect)✅; stable 3 way quicksort✅
 LAB 05: Huffman encoding✅; Huffman decoding❌;
 LAB 06: BST Implementation✅;
 LAB 07: Intersection points✅;
-LAB 08: K-means Clustering❌;
+LAB 08: K-means Clustering✅;
 LAB 09: Perfect Hashing❌;
-LAB 10: Regular expression to NFA❌;
+LAB 10: Regular expression to NFA✅;
